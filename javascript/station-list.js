@@ -15,7 +15,8 @@ const createTable = () => {
                 text:jsonStation[i]
             });
             let td3 = $('<td></td>', {
-                text:jsonForced[i]
+                text:jsonForced[i],
+                'class': 'forced'
             });
             let td4 = $('<td></td>', {
                 text:jsonMission[i]
