@@ -1,11 +1,15 @@
-const nowTime = $('#now-time');
+const showClock = () => {
+    let dateTime1 = new Date();
+    let date = dateTime1.getFullYear() + "年" +
+                (dateTime1.getMonth() + 1)  + "月" +
+                dateTime1.getDate() + "日";
 
-let date1 = new Date();
-let date2 = date1.getFullYear() + "年" +
-            (date1.getMonth() + 1)  + "月" +
-            date1.getDate() + "日" +
-            date1.getHours() + "時" +
-            date1.getMinutes() + "分" +
-            date1.getSeconds() + "秒" +
-            date1.getMilliseconds() + "ミリ秒" +
-console.log(date2);
+    let time = dateTime1.getHours() + "時" +
+                dateTime1.getMinutes() + "分" +
+                dateTime1.getSeconds() + "秒";
+
+    $('#now-date').text(date);
+    $('#now-time').text(time);
+}
+
+setInterval('showClock()',1000);
