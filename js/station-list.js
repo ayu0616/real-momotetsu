@@ -10,18 +10,19 @@ const createTable = () => {
             let tr = $('<tr></tr>');
             let td1 = $('<td></td>', {
                 text: jsonNumber[i],
-                'class': 'number'
+                'class': 'number align-middle'
             });
             let td2 = $('<td></td>', {
                 text: jsonStation[i],
-                'class': 'station'
+                'class': 'station align-middle'
             });
             let td3 = $('<td></td>', {
                 text: jsonForced[i],
-                'class': 'forced'
+                'class': 'forced align-middle'
             });
             let td4 = $('<td></td>', {
-                text: jsonMission[i]
+                text: jsonMission[i],
+                'class': 'align-middles'
             });
             tr.append(td1, td2, td3, td4);
             tbody.append(tr);
