@@ -11,3 +11,7 @@ h1 > a:hover {
 .forced {
     width: 1em;
 }
+
+.number {
+    width: 1em;
+}

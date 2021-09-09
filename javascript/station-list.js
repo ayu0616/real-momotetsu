@@ -9,18 +9,19 @@ const createTable = () => {
         for(i = 0; i <= len; i ++) {
             let tr = $('<tr></tr>');
             let td1 = $('<td></td>', {
-                text:jsonNumber[i]
+                text: jsonNumber[i],
+                'class': 'number'
             });
             let td2 = $('<td></td>', {
-                text:jsonStation[i],
+                text: jsonStation[i],
                 'class': 'station'
             });
             let td3 = $('<td></td>', {
-                text:jsonForced[i],
+                text: jsonForced[i],
                 'class': 'forced'
             });
             let td4 = $('<td></td>', {
-                text:jsonMission[i]
+                text: jsonMission[i]
             });
             tr.append(td1, td2, td3, td4);
             tbody.append(tr);
