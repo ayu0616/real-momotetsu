@@ -12,4 +12,5 @@ const showClock = () => {
     $('#now-time').text(time);
 }
 
+showClock()
 setInterval('showClock()',1000);
