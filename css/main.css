@@ -8,7 +8,7 @@ h1 > a:hover {
     color: black;
 }
 
-.forced {
+.forced, .forced-head {
     width: 1em;
     text-align: center;
 }

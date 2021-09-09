@@ -1,3 +1,9 @@
+const changeForcedColor = (elem) => {
+    if(elem.text() != "") {
+        elem.parent().addClass('table-warning');
+    }
+}
+
 const createTable = () => {
     const tbody = $('#tbody');
     $.getJSON("山陽本線（岡山→宮島口）.json", function(json) {
@@ -16,6 +22,9 @@ const createTable = () => {
                 text: jsonStation[i],
                 'class': 'station align-middle'
             });
+
+            changeForcedColor(td2)
+
             let td3 = $('<td></td>', {
                 text: jsonForced[i],
                 'class': 'forced align-middle'
@@ -37,6 +46,6 @@ const changeStationWidth = () => {
 
 createTable()
 
-$(document).ready(function(){
+$(document).ready(function() {
     changeStationWidth()
 });
