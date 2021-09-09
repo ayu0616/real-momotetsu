@@ -22,9 +22,6 @@ const createTable = () => {
                 text: jsonStation[i],
                 'class': 'station align-middle'
             });
-
-            changeForcedColor(td2)
-
             let td3 = $('<td></td>', {
                 text: jsonForced[i],
                 'class': 'forced align-middle'
@@ -35,6 +32,7 @@ const createTable = () => {
             });
             tr.append(td1, td2, td3, td4);
             tbody.append(tr);
+            changeForcedColor(td3)
         }
     });
 }
