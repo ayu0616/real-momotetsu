@@ -31,7 +31,7 @@ const createTable = () => {
 
 const changeStationWidth = () => {
     const stationElems = $('.station');
-    stationElems.width('4em');
+    stationElems.width('64');
 }
 
 createTable()
