@@ -10,8 +10,10 @@ h1 > a:hover {
 
 .forced {
     width: 1em;
+    text-align: center;
 }
 
 .number {
     width: 1em;
+    text-align: center;
 }
