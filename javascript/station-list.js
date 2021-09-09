@@ -12,7 +12,8 @@ const createTable = () => {
                 text:jsonNumber[i]
             });
             let td2 = $('<td></td>', {
-                text:jsonStation[i]
+                text:jsonStation[i],
+                'class': 'station'
             });
             let td3 = $('<td></td>', {
                 text:jsonForced[i],
@@ -21,10 +22,19 @@ const createTable = () => {
             let td4 = $('<td></td>', {
                 text:jsonMission[i]
             });
-            tr.append(td1, td2, td3, td4)
-            tbody.append(tr)
+            tr.append(td1, td2, td3, td4);
+            tbody.append(tr);
         }
     });
 }
 
+const changeStationWidth = () => {
+    const stationElems = $('.station');
+    stationElems.width('4em');
+}
+
 createTable()
+
+$(document).ready(function(){
+    changeStationWidth()
+});
