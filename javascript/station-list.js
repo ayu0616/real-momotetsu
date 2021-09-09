@@ -3,9 +3,9 @@ const createTable = () => {
     $.getJSON("山陽本線（岡山→宮島口）.json", function(json) {
         const jsonNumber = json.Number
         const jsonStation = json.駅
-        const jsonForced = json.必ず下車
+        const jsonForced = json.必停
         const jsonMission = json.ミッション
-        const len = Object.keys(jsonNumber).length
+        const len = Object.keys(jsonNumber).length - 1
         for(i = 0; i <= len; i ++) {
             let tr = $('<tr></tr>');
             let td1 = $('<td></td>', {
