@@ -1,5 +1,5 @@
 // 画像の縦横の長さ
-img_len = 300
+img_len = 250
 // 白画像を追加
 const addWhite = () => {
     const white = $('<img>', {
