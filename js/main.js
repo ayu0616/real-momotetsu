@@ -45,7 +45,8 @@ const showNavList = () => {
     const li1 = navList('TOP PAGE', 'index.html')
     const li2 = navList('STATION LIST', 'station-list.html')
     const li3 = navList('DICE', 'dice.html')
-    $('#navbar-nav').append(li1, li2, li3)
+    const li4 = navList('RULE', 'rule.html')
+    $('#navbar-nav').append(li1, li2, li3, li4)
 }
 
 showClock()
