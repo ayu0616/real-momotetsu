@@ -46,9 +46,19 @@ const getRandomInt = (max) => {
     return Math.floor(Math.random() * max) + 1;
 }
 
+// 画像を点滅させる関数を定義
+const blinkImg = () => {
+    return new Promise((resolve, reject) => {
+        $('#dice').fadeOut(500,function(){$(this).fadeIn(500)});
+        resolve();
+        reject();
+    });
+}
+
 // ボタンをクリックしたときに動作する関数を定義する
 const onClick = async () => {
     await rollDice();
+    await blinkImg();
     const num = $('#dice').attr('src').replace('/images/dice', '').replace('.jpg', '');
     toText(num);
 }
