@@ -1,12 +1,7 @@
 // サイコロをふる関数を定義
 const rollDice = () => {
-    const iMax = 5
-    for(i = 1; i <= iMax; i ++) {
-        addResult()
-        if(i < iMax) {
-            sleep(500);
-        }
-    }
+    sleep(5000)
+    addResult()
 }
 
 const addResult = () => {
