@@ -56,5 +56,5 @@ const onClick = async () => {
 // 結果をテキストに出力する関数を定義する
 const toText = (result) => {
     text = `結果は${result}です`;
-    $('#result-text').text(text);
+    $('#result-text').text(text).attr('style', '');
 }
