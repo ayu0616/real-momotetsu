@@ -1,50 +1,42 @@
-$(window).on('load', function() {
+    // 画像の縦横の長さ
+    img_len = 300
+    // 白画像を追加
+    const addWhite = () => {
+        const white = $('<img>', {
+            src: "/images/white.png",
+            alt: "真っ白な画像",
+            width: img_len,
+            height: img_len
+        });
+        $('#dice-container').append(white);
+    }
+
+    addWhite();
+
     // サイコロをふる関数を定義
     const rollDice = () => {
         const container = $('#dice-container');
-        // container.width(400).height(400)
-        // container.html('');
-        // const spinner = $('<div></div>', {
-        //     'class': 'spinner-border text-primary align-middle',
-        //     role: 'status'
-        // });
-        // const span = $('<span></span>', {
-        //     'class': 'visually-hidden',
-        //     text: 'Loading...'
-        // });
-        // spinner.append(span)
-        // container.append(spinner)
         const result = $('<img>', {
             id: 'dice',
             alt: 'サイコロの画像',
-            width: '400',
-            height: '400'
+            width: img_len,
+            height: img_len
         });
         const randResult = () => {
             let rand = getRandomInt(6);
             result.attr('src', `/images/dice${rand}.jpg`);
         }
         container.html('')
-        randResult()
+        randResult();
         container.append(result);
         loopSleep(20, 150, function() {
-            randResult()
-        })
+            randResult();
+        });
     }
 
     // 整数の乱数を出力する関数を定義
     const getRandomInt = (max) => {
         return Math.floor(Math.random() * max) + 1;
-    }
-
-    // sleep関数を定義（引数はミリ秒単位）
-    const sleep = (a) => {
-        var dt1 = new Date().getTime();
-        var dt2 = new Date().getTime();
-        while (dt2 < dt1 + a) {
-            dt2 = new Date().getTime();
-        }
-        return;
     }
 
     // ループとスリープを組み合わせた関数
@@ -66,4 +58,3 @@ $(window).on('load', function() {
         }
         loopFunc();
     }
-})
