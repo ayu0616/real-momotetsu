@@ -29,7 +29,7 @@
         container.html('')
         randResult();
         container.append(result);
-        loopSleep(20, 150, function() {
+        loopSleep(20, 250, function() {
             randResult();
         });
     }
