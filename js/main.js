@@ -13,13 +13,26 @@ const showClock = () => {
     $('#now-time').text(time);
 }
 
+// ナビバーのブランドのテキストを表示する関数を定義
+const showBrand = (brand) => {
+    const iconSize = 30
+    const icon = $('<img>', {
+        src: 'images/peach.png',
+        class: 'me-2',
+        alt: '桃の画像',
+        width: iconSize,
+        height: iconSize
+    });
+    $('#navbar-brand').append(icon, brand).addClass('align-middle')
+}
+
 // ナビバーのリスト作成する関数を定義
-const navList = (text, url) => {
+const navList = (title, url) => {
     const li = $('<li></li>', {
         'class': 'nav-item',
     });
     const a = $('<a></a>', {
-        text: text,
+        text: title,
         href: url,
         'class': "nav-link active text-decoration-underline",
         'aria-current': "page"
@@ -28,7 +41,7 @@ const navList = (text, url) => {
 }
 
 // ナビバーのリストを表示する関数を定義
-const showNav = () => {
+const showNavList = () => {
     const li1 = navList('TOP PAGE', 'index.html')
     const li2 = navList('STATION LIST', 'station-list.html')
     const li3 = navList('DICE', 'dice.html')
@@ -37,4 +50,5 @@ const showNav = () => {
 
 showClock()
 setInterval('showClock()',1000);
-showNav()
+showBrand('REAL-MOMOTETSU')
+showNavList()
