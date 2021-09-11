@@ -22,6 +22,7 @@ const sleep = (sec) => {
 
 // サイコロをふる関数を定義
 const rollDice = async () => {
+    $('#btn').attr('disabled', '')
     const container = $('#dice-container');
     const result = $('<img>', {
         id: 'dice',
@@ -43,26 +44,6 @@ const rollDice = async () => {
 // 整数の乱数を出力する関数を定義
 const getRandomInt = (max) => {
     return Math.floor(Math.random() * max) + 1;
-}
-
-// ループとスリープを組み合わせた関数
-function loopSleep(_loopLimit,_interval, _mainFunc) {
-    var loopLimit = _loopLimit;
-    var interval = _interval;
-    var mainFunc = _mainFunc;
-    var i = 0;
-    var loopFunc = function () {
-        var result = mainFunc(i);
-        if (result === false) {
-            // break機能
-            return;
-        }
-        i = i + 1;
-        if (i < loopLimit) {
-            setTimeout(loopFunc, interval);
-        }
-    }
-    loopFunc();
 }
 
 // ボタンをクリックしたときに動作する関数を定義する
