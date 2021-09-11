@@ -57,4 +57,21 @@ const onClick = async () => {
 const toText = (result) => {
     text = `結果は${result}です`;
     $('#result-text').text(text).attr('style', '');
+    replaceBtn()
+}
+
+// ボタンを置き換える関数を定義する
+const replaceBtn = () => {
+    const reloadBtn = $('<button></button>', {
+        type: 'button',
+        'class': 'btn btn-warning m-3',
+        onclick: 'reloadPage()',
+        text: 'もう一度サイコロをふる'
+    });
+    $('#btn').replaceWith(reloadBtn);
+}
+
+// リロードする関数を定義する
+const reloadPage = () => {
+    location.reload();
 }
