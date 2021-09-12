@@ -5,7 +5,7 @@ const addWhite = () => {
         alt: "真っ白な画像",
         width: '100%'
     });
-    $('#dice-container').append(white);
+    $('div[id^="dice-container"]').append(white);
 }
 
 addWhite();
@@ -18,11 +18,11 @@ const sleep = (sec) => {
 };
 
 // サイコロをふる関数を定義
-const rollDice = async () => {
+const rollDice = async (n) => {
     $('#btn').attr('disabled', '')
-    const container = $('#dice-container');
+    const container = $(`#dice-container${n}`);
     const result = $('<img>', {
-        id: 'dice',
+        id: `dice${n}`,
         alt: 'サイコロの画像',
         width: '100%'
     });
@@ -43,26 +43,32 @@ const getRandomInt = (max) => {
 }
 
 // 画像を点滅させる関数を定義
-const blinkImg = () => {
+const blinkImg = (n) => {
     return new Promise((resolve, reject) => {
-        $('#dice').fadeOut(500,function(){$(this).fadeIn(500)});
+        $(`#dice${n}`).fadeOut(500,function(){$(this).fadeIn(500)});
         resolve();
         reject();
     });
 }
 
+// n番目のサイコロをふる関数を定義
+const nRoll = async (n) => {
+    await rollDice(n);
+    await blinkImg(n);
+    const num = $(`#dice${n}`).attr('src').replace('/images/dice', '').replace('.jpg', '');
+    toText(num, n);
+}
+
 // ボタンをクリックしたときに動作する関数を定義する
 const onClick = async () => {
-    await rollDice();
-    await blinkImg();
-    const num = $('#dice').attr('src').replace('/images/dice', '').replace('.jpg', '');
-    toText(num);
+    nRoll(1);
+    nRoll(2);
 }
 
 // 結果をテキストに出力する関数を定義する
-const toText = (result) => {
+const toText = (result, n) => {
     text = `結果は${result}です`;
-    $('#result-text').text(text).attr('style', '');
+    $(`#result-text${n}`).text(text).attr('style', '');
     replaceBtn()
 }
 
