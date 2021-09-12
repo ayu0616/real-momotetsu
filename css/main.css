@@ -31,7 +31,3 @@ div[id^='dice-container'] > img {
 #toc-container {
     position: sticky;
 }
-
-#border-danger {
-    border-color: pink !important;
-}
