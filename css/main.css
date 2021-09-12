@@ -17,3 +17,8 @@ h1 > a:hover {
     width: 1em;
     text-align: center;
 }
+
+#dice-container > img {
+    max-width: 500px;
+    max-height: 500px;
+}

@@ -1,12 +1,9 @@
-// 画像の縦横の長さ
-img_len = 250
 // 白画像を追加
 const addWhite = () => {
     const white = $('<img>', {
         src: "/images/white.png",
         alt: "真っ白な画像",
-        width: img_len,
-        height: img_len
+        width: '100%'
     });
     $('#dice-container').append(white);
 }
@@ -27,8 +24,7 @@ const rollDice = async () => {
     const result = $('<img>', {
         id: 'dice',
         alt: 'サイコロの画像',
-        width: img_len,
-        height: img_len
+        width: '100%'
     });
     container.html('');
     let rand = getRandomInt(6);
