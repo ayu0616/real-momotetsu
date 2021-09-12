@@ -61,6 +61,11 @@ const setScroll = () => {
     $('#rule-container ol > li').addClass('mb-1');
 })();
 
+// olタグにm-3クラスを追加する
+(function() {
+    $('#rule-container ol').addClass('m-3').css('padding-left', '1.5em')
+})();
+
 addIdToHead()
 createA()
 setScroll()
