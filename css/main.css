@@ -18,7 +18,7 @@ h1 > a:hover {
     text-align: center;
 }
 
-#dice-container > img {
+div[id^='dice-container'] > img {
     max-width: 500px;
     max-height: 500px;
 }
