@@ -30,10 +30,10 @@ const rollDice = async () => {
     let rand = getRandomInt(6);
     result.attr('src', `/images/dice${rand}.jpg`);
     container.append(result);
-    for(i = 1; i <= 15; i ++) {
+    for(i = 1; i <= 10 + getRandomInt(10); i ++) {
         let rand = getRandomInt(6);
         result.attr('src', `/images/dice${rand}.jpg`);
-        await sleep(1 / 3)
+        await sleep(getRandomInt(10) / 10)
     };
 }
 
