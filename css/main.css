@@ -25,4 +25,9 @@ h1 > a:hover {
 
 #toc {
     list-style: none;
+    /* overflow: auto; */
+}
+
+#toc-container {
+    position: sticky;
 }

@@ -3,8 +3,14 @@ const head = $('h2')
 head.addClass('m-3')
 
 // ナビバーの高さを取得する
-const navHeight = $('.sticky-top').outerHeight()
-console.log(navHeight);
+const navHeight = $('.sticky-top').outerHeight();
+
+// 目次を固定する
+(function() {
+    const tocTop = $('#toc').offset().top;
+    $('#toc-container').css('top', tocTop);
+    // $('#toc').css('height', $(window).height() - tocTop);
+})();
 
 // 見出しにidを振る関数を定義
 const addIdToHead = () => {
@@ -44,6 +50,16 @@ const setScroll = () => {
         return false;
     });
 }
+
+// ルールの各見出しについてクラスを追加する
+(function() {
+    $('#rule-container > div').addClass('m-3 border rounded');
+})();
+
+// ルールのliタグに下のmarginを追加する
+(function() {
+    $('#rule-container ol > li').addClass('mb-1');
+})();
 
 addIdToHead()
 createA()
