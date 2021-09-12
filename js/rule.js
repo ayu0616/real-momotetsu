@@ -54,7 +54,7 @@ const setScroll = () => {
 
 // ルールの各見出しについてクラスを追加する
 (function() {
-    $('#rule-container > div').addClass('m-3 border rounded');
+    $('#rule-container > div').addClass('m-3 border border-danger rounded');
 })();
 
 // ルールのliタグに下のmarginを追加する

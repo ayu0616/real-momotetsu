@@ -49,7 +49,6 @@ const showNavList = () => {
     $('#navbar-nav').append(li1, li2, li3, li4)
 }
 
-
 showClock()
 setInterval('showClock()',1000);
 showBrand('REAL-MOMOTETSU')
