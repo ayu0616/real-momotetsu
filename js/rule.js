@@ -1,5 +1,5 @@
 // 見出しについて
-const head = $('h2')
+const head = $('#rule-container h2')
 head.addClass('m-3')
 
 // ナビバーの高さを取得する
@@ -28,6 +28,7 @@ const createA = () => {
             text: headText,
             href: `#${headId}`
         });
+        a.css('color', 'black')
         let li = $('<li></li>').append(a);
         $('#toc').append(li);
     });
