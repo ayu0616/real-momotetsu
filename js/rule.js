@@ -30,7 +30,7 @@ const createA = () => {
         });
         a.css('color', 'black')
         let li = $('<li></li>').append(a);
-        li.addClass('mb-1')
+        li.addClass('mb-2')
         $('#toc').append(li);
     });
 }
