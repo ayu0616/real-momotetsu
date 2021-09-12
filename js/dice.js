@@ -30,10 +30,10 @@ const rollDice = async (n) => {
     let rand = getRandomInt(6);
     result.attr('src', `/images/dice${rand}.jpg`);
     container.append(result);
-    for(i = 1; i <= 10 + getRandomInt(10); i ++) {
+    for(i = 1; i <= 20; i ++) {
         let rand = getRandomInt(6);
         result.attr('src', `/images/dice${rand}.jpg`);
-        await sleep(getRandomInt(10) / 10)
+        await sleep(0.4)
     };
 }
 
@@ -62,7 +62,9 @@ const nRoll = async (n) => {
 // ボタンをクリックしたときに動作する関数を定義する
 const onClick = async () => {
     nRoll(1);
-    nRoll(2);
+    await nRoll(2);
+    await sleep(1);
+    sumNumber();
 }
 
 // 結果をテキストに出力する関数を定義する
@@ -86,4 +88,35 @@ const replaceBtn = () => {
 // リロードする関数を定義する
 const reloadPage = () => {
     location.reload();
+}
+
+// 駅名の選択肢を追加する
+$.getJSON("山陽本線（岡山→宮島口）.json", function(json) {
+    const jsonNumber = json.Number;
+    const jsonStation = json.駅;
+    const jsonLen = Object.keys(jsonNumber).length;
+
+    for(i = 0; i < jsonLen; i ++) {
+        const option = $('<option></option>', {
+            value: i,
+            text: `${jsonNumber[i]}. ${jsonStation[i]}`
+        });
+        $('#station-select').append(option);
+    }
+});
+
+const sumNumber = () => {
+    return new Promise((resolve, reject) => {
+        let sum = 0
+        $('img[id^="dice"]').each(function() {
+            let diceSrc = $(this).attr('src');
+            diceSrc = diceSrc.replace('/images/dice', '').replace('.jpg', '');
+            sum += Number(diceSrc)
+        });
+        const selectedVal = Number($('#station-select option:selected').val());
+        const nextStation = $(`#station-select > option[value="${selectedVal + sum}"]`).text()
+        const resultText = `合計：${sum}<br>次の駅：${nextStation}`
+        $('#result').html(resultText)
+        resolve();
+    });
 }

@@ -27,7 +27,7 @@
     </nav>
     <div class="container">
         <h1 class="m-3">サイコロ</h1>
-        <div class="row justify-content-around border border-danger border-2 rounded m-3 text-center">
+        <div class="row justify-content-around border border-danger rounded m-3 text-center">
             <div class="col text-center">
                 <div class="m-auto" id="dice-container1"></div>
             </div>
@@ -37,12 +37,17 @@
         </div>
         <div class="row">
             <div class="col">
-                <select class="form-select m-3">
-                    <option selected>駅を選択する</option>
+                <select id="station-select" class="form-select m-3">
+                    <option selected>現在の駅を選択</option>
                 </select>
             </div>
             <div class="col text-center">
                 <button id="btn" type="button" class="btn btn-primary m-3" onclick="onClick()">サイコロをふる</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <p id="result" class="m-3"></p>
             </div>
         </div>
     </div>
