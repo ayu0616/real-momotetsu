@@ -19,7 +19,8 @@ const sleep = (sec) => {
 
 // サイコロをふる関数を定義
 const rollDice = async (n) => {
-    $('#btn').attr('disabled', '')
+    $('#btn').attr('disabled', '');
+    $('#station-select').attr('disabled', '');
     const container = $(`#dice-container${n}`);
     const result = $('<img>', {
         id: `dice${n}`,
@@ -80,7 +81,7 @@ const replaceBtn = () => {
         type: 'button',
         'class': 'btn btn-warning m-3',
         onclick: 'reloadPage()',
-        text: 'もう一度サイコロをふる'
+        text: 'もう一度ふる'
     });
     $('#btn').replaceWith(reloadBtn);
 }
@@ -115,7 +116,15 @@ const sumNumber = () => {
             sum += Number(diceSrc)
         });
         const selectedVal = Number($('#station-select option:selected').val());
-        const nextStation = $(`#station-select > option[value="${selectedVal + sum}"]`).text()
+        const setNextStationNum = () => {
+            if(selectedVal + sum > $('#station-select > option[value]').length - 1) {
+                return $('#station-select > option[value]').length - 1;
+            } else {
+                return selectedVal + sum;
+            }
+        }
+        console.log(setNextStationNum());
+        const nextStation = $(`#station-select > option[value="${setNextStationNum()}"]`).text()
         const resultText = `合計：${sum}<br>次の駅：${nextStation}`
         $('#result').html(resultText)
         resolve();
