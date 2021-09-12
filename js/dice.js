@@ -105,6 +105,7 @@ $.getJSON("山陽本線（岡山→宮島口）.json", function(json) {
     }
 });
 
+// 合計値と次に下車する駅を出力する関数を定義
 const sumNumber = () => {
     return new Promise((resolve, reject) => {
         let sum = 0
@@ -120,3 +121,12 @@ const sumNumber = () => {
         resolve();
     });
 }
+
+// 現在の駅を選択しないとボタンを押せないようにする
+$('#station-select').on('change', function() {
+    if($('#station-select option:selected').text() == "現在の駅を選択") {
+        $('#btn').attr('disabled', '');
+    } else {
+        $('#btn').removeAttr('disabled');
+    }
+});
