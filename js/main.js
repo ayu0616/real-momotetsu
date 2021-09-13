@@ -19,7 +19,7 @@ const navList = (title, url) => {
     const a = $('<a></a>', {
         text: title,
         href: url,
-        'class': "nav-link active text-decoration-underline",
+        'class': "nav-link active text-decoration-underline text-truncate",
         'aria-current': "page"
     });
     return li.append(a)
@@ -27,12 +27,18 @@ const navList = (title, url) => {
 
 // ナビバーのリストを表示する関数を定義
 const showNavList = () => {
-    const li1 = navList('TOP PAGE', 'index.html')
-    const li2 = navList('STATION LIST', 'station-list.html')
-    const li3 = navList('DICE', 'dice.html')
-    const li4 = navList('RULE', 'rule.html')
-    $('#navbar-nav').append(li1, li2, li3, li4)
+    const li1 = navList('TOP PAGE', 'index.html');
+    const li2 = navList('STATION LIST', 'station-list.html');
+    const li3 = navList('DICE', 'dice.html');
+    const li4 = navList('RULE', 'rule.html');
+    const li5 = navList('SCHEDULE', 'schedule.html');
+    $('#navbar-nav').append(li1, li2, li3, li4, li5);
 }
 
-showBrand('REAL-MOMOTETSU')
-showNavList()
+showBrand('REAL-MOMOTETSU');
+showNavList();
+
+// ナビバーに影をつける
+(() => {
+    $('nav[class*="navbar"]').addClass('shadow-sm');
+})();

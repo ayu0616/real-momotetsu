@@ -3,7 +3,7 @@
     const col = 'col-sm-6'
     $('#card-container > div').addClass(`${col} mb-3`);
     $(`#card-container > .${col} > div`).addClass('card').css('height', '100%');
-    $('.card > img').addClass('card-img-top');
+    $('.card > img').addClass('card-img-top shadow-sm');
     $('.card > div').addClass('card-body position-relative');
     $('.card-body > h5').addClass('card-title');
     $('.card-body > p').addClass('card-text');
