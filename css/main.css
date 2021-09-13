@@ -27,7 +27,3 @@ div[id^='dice-container'] > img {
     list-style: none;
     /* overflow: auto; */
 }
-
-#toc-container {
-    position: sticky;
-}

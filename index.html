@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="/css/main.css">
     <!-- BootstrapのCSS読み込み -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
 </head>
 <body>
     <nav class="navbar sticky-top navbar-expand-sm navbar-light bg-light">
@@ -25,30 +26,65 @@
             </div>
         </div>
     </nav>
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <p class="m-3">a</p>
+    <div class="container">
+        <h1 class="my-3">トップページ</h1>
+        <div class="row" id="time-container">
+            <div class="col-sm-6">
+                <div class="border border-danger rounded text-center">
+                    <h2 class="m-3">現在時刻</h2>
+                    <p id="now-date" class="m-0"></p>
+                    <p id="now-time"></p>
                 </div>
-                <div class="col-sm-6 col-sm-auto">
-                    <h1 class="m-3">トップページ</h1>
-                    <div class="border border-danger rounded text-center m-3">
-                        <h2 class="m-3">現在時刻</h2>
-                        <p id="now-date" class="m-0"></p>
-                        <p id="now-time"></p>
-                    </div>
-                </div>
-                <div class="col">
-                    <p class="m-3">b</p>
+            </div>
+            <div class="col-sm-6">
+                <div class="border border-danger rounded text-center" id="count-down">
+                    <h2 class="m-3">当日まで（仮）</h2>
+                    <p class="m-0">リアル桃鉄当日（○年○月○日）まで</p>
+                    <p>あと○日</p>
                 </div>
             </div>
         </div>
+        <div class="row row-cols-auto" id="card-container">
+            <div>
+                <div>
+                    <img src="/images/tokyo_eki.png" alt="東京駅の写真">
+                    <div>
+                        <h5>駅リスト</h5>
+                        <p>今回の旅で訪れる駅のリスト。せっかく考えたミッション、半分以上は挑戦されることはないんだろうな。</p>
+                        <a href="station-list.html"></a>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <img src="/images/dice-irasutoya.png" alt="サイコロの写真">
+                    <div>
+                        <h5>サイコロ</h5>
+                        <p>自動でサイコロを振ってくれる。次にどの駅に止まるべきかも教えてくれる。コンピューターに自らの行動を決定されるって近未来的だね。</p>
+                        <a href="dice.html"></a>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <img src="/images/book_law_roppouzensyo.png" alt="">
+                    <div>
+                        <h5>ルール</h5>
+                        <p>「リアル桃鉄」のルールを記載している。こんな長ったらしいもの読みたくないよね。なんでこんなモノ作っちゃったんだろ...。</p>
+                        <a href="rule.html"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 
     <!-- jQuery読み込み -->
     <script type="text/javascript" src="/js/jquery-3.6.0.min.js"></script>
     <!-- 自分のjsを読み込み -->
     <script type="text/javascript" src="/js/main.js"></script>
+    <script type="text/javascript" src="/js/index.js"></script>
     <!-- Bootstrap読み込み -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 </body>

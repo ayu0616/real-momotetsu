@@ -26,32 +26,49 @@
         </div>
     </nav>
     <div class="container">
-        <div class="row">
-            <div class="col">
-                <p class="m-3">a</p>
-            </div>
-            <div class="col-sm-6 col-sm-auto">
-                <h1 class="m-3">駅リスト</h1>
-                <div class="m-3">
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th scope="col" class="align-middle number">番号</th>
-                                <th scope="col" class="align-middle station">駅</th>
-                                <th scope="col" class="align-middle forced-head">必停</th>
-                                <th scope="col" class="align-middle">ミッション</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tbody"></tbody>
-                    </table>
+        <div class="row justify-content-around">
+            <div class="col-sm-4">
+                <div id="description">
+                    <h2 class="my-3">説明</h2>
+                    <ol>
+                        <li>このリストには「リアル桃鉄」で下車する可能性があるすべての駅が記載されています。</li>
+                        <li>★マークが付いた駅は必ず下車しなければならない駅です。</li>
+                        <li>駅名がある行をクリックすると、ミッションを確認することができます。</li>
+                    </ol>
                 </div>
             </div>
-            <div class="col">
-                <p class="m-3">a</p>
+            <div class="col-sm-8 col-sm-auto">
+                <h1 class="my-3">駅リスト</h1>
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="align-middle number">番号</th>
+                            <th scope="col" class="align-middle station">駅</th>
+                            <th scope="col" class="align-middle forced-head">必停</th>
+                            <!-- <th scope="col" class="align-middle">ミッション</th> -->
+                        </tr>
+                    </thead>
+                    <tbody id="tbody"></tbody>
+                </table>
             </div>
         </div>
     </div>
 
+    <!-- 以下modal -->
+    <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="modal-label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal-label"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body"></div>
+                <div class="modal-footer">
+                    <button id="okBtn" type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- jQuery読み込み -->
     <script type="text/javascript" src="/js/jquery-3.6.0.min.js"></script>
     <!-- 自分のjsを読み込み -->

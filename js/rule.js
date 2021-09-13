@@ -7,9 +7,10 @@ const navHeight = $('.sticky-top').outerHeight();
 
 // 目次を固定する
 (function() {
-    const tocTop = $('#toc').offset().top;
-    $('#toc-container').css('top', tocTop);
-    // $('#toc').css('height', $(window).height() - tocTop);
+    const tocContainer = $('#toc-container')
+    const tocTop = tocContainer.offset().top;
+    tocContainer.css('top', tocTop);
+    tocContainer.css('position', 'sticky')
 })();
 
 // 見出しにidを振る関数を定義
@@ -55,7 +56,7 @@ const setScroll = () => {
 
 // ルールの各見出しについてクラスを追加する
 (function() {
-    $('#rule-container > div').addClass('m-3 border border-danger rounded');
+    $('#rule-container > div').addClass('my-3 border border-danger rounded');
 })();
 
 // ルールのliタグに下のmarginを追加する
@@ -63,7 +64,7 @@ const setScroll = () => {
     $('#rule-container ol > li').addClass('mb-1');
 })();
 
-// olタグにm-3クラスを追加する
+// olタグにm-3クラスを追加し、paddingを1.5emにする
 (function() {
     $('#rule-container ol').addClass('m-3').css('padding-left', '1.5em')
 })();

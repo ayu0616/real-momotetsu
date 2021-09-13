@@ -1,14 +1,13 @@
 // 白画像を追加
-const addWhite = () => {
+(() => {
     const white = $('<img>', {
         src: "/images/white.png",
         alt: "真っ白な画像",
-        width: '100%'
+        width: '100%',
+        'class': 'border border-danger rounded'
     });
     $('div[id^="dice-container"]').append(white);
-}
-
-addWhite();
+})();
 
 // sleep関数を定義
 const sleep = (sec) => {
@@ -25,7 +24,8 @@ const rollDice = async (n) => {
     const result = $('<img>', {
         id: `dice${n}`,
         alt: 'サイコロの画像',
-        width: '100%'
+        width: '100%',
+        'class': 'border border-danger rounded'
     });
     container.html('');
     let rand = getRandomInt(6);
@@ -79,7 +79,7 @@ const toText = (result, n) => {
 const replaceBtn = () => {
     const reloadBtn = $('<button></button>', {
         type: 'button',
-        'class': 'btn btn-warning m-3',
+        'class': 'btn btn-warning',
         onclick: 'reloadPage()',
         text: 'もう一度ふる'
     });
@@ -92,7 +92,9 @@ const reloadPage = () => {
 }
 
 // 駅名の選択肢を追加する
-$.getJSON("山陽本線（岡山→宮島口）.json", function(json) {
+let json;
+$.getJSON("山陽本線（岡山→宮島口）.json", function(data) {
+    json = data;
     const jsonNumber = json.Number;
     const jsonStation = json.駅;
     const jsonLen = Object.keys(jsonNumber).length;
@@ -116,6 +118,7 @@ const sumNumber = () => {
             sum += Number(diceSrc)
         });
         const selectedVal = Number($('#station-select option:selected').val());
+
         const setNextStationNum = () => {
             if(selectedVal + sum > $('#station-select > option[value]').length - 1) {
                 return $('#station-select > option[value]').length - 1;
@@ -123,19 +126,26 @@ const sumNumber = () => {
                 return selectedVal + sum;
             }
         }
+
         console.log(setNextStationNum());
-        const nextStation = $(`#station-select > option[value="${setNextStationNum()}"]`).text()
-        const resultText = `合計：${sum}<br>次の駅：${nextStation}`
-        $('#result').html(resultText)
+        const nextStation = $(`#station-select > option[value="${setNextStationNum()}"]`).text();
+        const resultText = `合計：${sum}<br>次の駅：${nextStation}`;
+        $('#next-station').html(nextStation);
         resolve();
     });
 }
 
-// 現在の駅を選択しないとボタンを押せないようにする
+// 駅を選択すると動作する関数
 $('#station-select').on('change', function() {
     if($('#station-select option:selected').text() == "現在の駅を選択") {
         $('#btn').attr('disabled', '');
+        $('#current-station').text('');
     } else {
         $('#btn').removeAttr('disabled');
+        $('#current-station').text($('#station-select option:selected').text());
     }
 });
+
+(() => {
+    $('#result-container > div').addClass('col');
+})();

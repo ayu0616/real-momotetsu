@@ -26,28 +26,33 @@
         </div>
     </nav>
     <div class="container">
-        <h1 class="m-3">サイコロ</h1>
-        <div class="row justify-content-around border border-danger rounded m-3 text-center">
-            <div class="col text-center">
-                <div class="m-auto" id="dice-container1"></div>
+        <h1 class="my-3">サイコロ</h1>
+        <div class="row row-2 justify-content-evenly text-center">
+            <div class="col text-center my-3">
+                <div id="dice-container1"></div>
             </div>
-            <div class="col text-center">
-                <div class="m-auto" id="dice-container2"></div>
+            <div class="col text-center my-3">
+                <div id="dice-container2"></div>
             </div>
         </div>
-        <div class="row">
-            <div class="col">
-                <select id="station-select" class="form-select m-3">
+        <div class="row my-3">
+            <div class="col col-sm-8">
+                <select id="station-select" class="form-select">
                     <option selected>現在の駅を選択</option>
                 </select>
             </div>
-            <div class="col text-center">
-                <button id="btn" type="button" class="btn btn-primary m-3" onclick="onClick()" disabled>サイコロをふる</button>
+            <div class="col text-end">
+                <button id="btn" type="button" class="btn btn-primary" onclick="onClick()" disabled>サイコロをふる</button>
             </div>
         </div>
-        <div class="row">
-            <div class="col">
-                <p id="result" class="m-3"></p>
+        <div class="row my-3" id="result-container">
+            <div>
+                <h2>現在の駅</h2>
+                <p id="current-station"></p>
+            </div>
+            <div>
+                <h2>次の駅</h2>
+                <p id="next-station"></p>
             </div>
         </div>
     </div>
