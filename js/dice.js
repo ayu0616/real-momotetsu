@@ -27,10 +27,9 @@ const rollDice = async (n) => {
         width: '100%',
         'class': 'border border-danger rounded'
     });
-    container.html('');
     let rand = getRandomInt(6);
     result.attr('src', `/images/dice${rand}.jpg`);
-    container.append(result);
+    container.children('img').replaceWith(result);
     for(i = 1; i <= 20; i ++) {
         let rand = getRandomInt(6);
         result.attr('src', `/images/dice${rand}.jpg`);
