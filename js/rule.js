@@ -28,7 +28,7 @@ $(window).on('load resize', function() {
     } else {
         $('#toc').height(`${$(window).height() / 3}`)
     }
-})
+});
 
 // 見出しにidを振る関数を定義
 const addIdToHead = () => {
