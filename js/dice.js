@@ -1,3 +1,8 @@
+// containerの横幅を制限する
+(() => {
+    $('.container').css('max-width', '750px')
+})();
+
 // 白画像を追加
 (() => {
     const white = $('<img>', {

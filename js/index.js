@@ -1,3 +1,8 @@
+// containerの横幅を制限する
+(() => {
+    $('.container').css('max-width', '750px')
+})();
+
 // カードの要素を作成
 (() => {
     const col = 'col-sm-6'
