@@ -54,7 +54,7 @@ const timeSchedule = (hour, minute, content) => {
     });
 
     const table = $('<table></table>', {
-        'class': 'table'
+        'class': 'table table-striped'
     });
     const thead = $('<thead></thead>');
     const tbody = $('<tbody></tbody>')
@@ -79,9 +79,13 @@ const timeSchedule = (hour, minute, content) => {
     // 1日目のスケジュール
     scheduleDay = 1;
     timeSchedule(8, 0, 'JR西宮駅に集合');
+    timeSchedule(20, 0, '岡山のホテルに到着');
 
     // 2日目のスケジュール
     scheduleDay = 2;
+    timeSchedule(6, 30, '起床');
+    timeSchedule(8, 0, 'リアル桃鉄スタート（岡山駅）');
+    timeSchedule(21, 0, '宮島に到着する最終時刻');
 
     // 3日目のスケジュール
     scheduleDay = 3;
