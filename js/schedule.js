@@ -30,6 +30,7 @@ const timeSchedule = (hour, minute, content) => {
     const timeElem = $('<td></td>', {
         text: time,
     });
+    timeElem.css('width', '3.5em')
 
     const contentElem = $('<td></td>', {
         text: content,
@@ -89,6 +90,7 @@ const timeSchedule = (hour, minute, content) => {
 
     // 3日目のスケジュール
     scheduleDay = 3;
+    timeSchedule(7, 0, '起床')
 })();
 // スケジュールここまで
 
