@@ -6,7 +6,7 @@ let jsonMission;
 
 const createTable = () => {
     const tbody = $('#tbody');
-    $.getJSON("山陽本線（岡山→宮島口）.json", function(data) {
+    $.getJSON("/json/山陽本線（岡山→宮島口）.json", function(data) {
         json = data
         jsonNumber = json.Number;
         jsonStation = json.駅;
@@ -55,14 +55,33 @@ const changeForcedColor = (elem) => {
 
 createTable();
 
+// modalの中に表示する写真
+let imageUrls
+$.getJSON('/json/stationImage.json', function(data) {
+    imageUrls = data.url;
+});
+
+const modalImage = (num) => {
+    const imageUrl = imageUrls[num];
+    const img = $('<img></img>', {
+        src: imageUrl
+    });
+    img.width('100%')
+    return img;
+}
+
 // 表の行をクリックしたときにmodalを表示する
 $(document).on('click', 'tr[data-bs-toggle="modal"]', function() {
     const stationNumber = $(this).children('.number').text();
     const stationName = $(this).children('.station').text();
     const mission = jsonMission[stationNumber];
     const labelText = `No.${stationNumber} ${stationName}`;
+    const p = $('<p></p>', {
+        'class': 'mt-3 mb-0'
+    });
+    p.html(`【ミッション】<br>${mission}`);
     $('#modal-label').text(labelText);
-    $('.modal-body').html(`【ミッション】<br>${mission}`)
+    $('.modal-body').html('').prepend(modalImage(stationNumber)).append(p);
 });
 
 // リストの見た目を調整する
