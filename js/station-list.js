@@ -30,16 +30,16 @@ const createTable = () => {
                 text: jsonForced[i],
                 'class': 'forced align-middle'
             });
-            // let td4 = $('<td></td>', {
-            //     text: jsonMission[i],
-            //     'class': 'mission align-middles'
-            // });
-            tr.append(td1, td2, td3);
+            let td4 = $('<td></td>', {
+                text: jsonMission[i],
+                'class': 'mission align-middles'
+            });
+            tr.append(td1, td2, td3, td4);
             tbody.append(tr);
             changeForcedColor(td3);
         }
     });
-    changeStationWidth();
+    // changeStationWidth();
 }
 
 const changeForcedColor = (elem) => {
@@ -48,10 +48,10 @@ const changeForcedColor = (elem) => {
     }
 }
 
-const changeStationWidth = () => {
-    const stationElems = $('.station');
-    stationElems.width('64');
-}
+// const changeStationWidth = () => {
+//     const stationElems = $('.station');
+//     stationElems.width('64');
+// }
 
 createTable();
 
@@ -63,14 +63,6 @@ $(document).on('click', 'tr[data-bs-toggle="modal"]', function() {
     const labelText = `No.${stationNumber} ${stationName}`;
     $('#modal-label').text(labelText);
     $('.modal-body').html(`【ミッション】<br>${mission}`)
-});
-
-// エンターキーを押したとき、OKボタンを押す
-$(document).keypress(function(e) {
-    if (e.keyCode == 13) {
-        $('#okBtn').click()
-    return false;
-    }
 });
 
 // リストの見た目を調整する
@@ -88,3 +80,23 @@ $(document).keypress(function(e) {
     des.css('top', desTop);
     des.css('position', 'sticky')
 })();
+
+// エンターキーを押したとき、OKボタンを押す
+$(document).keypress(function(e) {
+    if (e.keyCode == 13) {
+        $('#okBtn').click()
+    return false;
+    }
+});
+
+// ウィンドウサイズが小さくなったとき、表中のミッション欄を隠す
+const hideWidth = 976;
+
+$(window).on('load resize', function() {
+    const windowWidth = $(window).width();
+    if(windowWidth <= hideWidth) {
+        $('.mission').addClass('d-none');
+    } else {
+        $('.mission').removeClass('d-none');
+    }
+});
