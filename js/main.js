@@ -19,7 +19,7 @@ const navList = (title, url) => {
     const a = $('<a></a>', {
         text: title,
         href: url,
-        'class': "nav-link active text-decoration-underline text-truncate",
+        'class': "align-middle nav-link active text-decoration-underline",
         'aria-current': "page"
     });
     return li.append(a)
