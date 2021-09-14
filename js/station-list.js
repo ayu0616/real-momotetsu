@@ -39,6 +39,7 @@ const createTable = () => {
             changeForcedColor(td3);
         }
     });
+    $('.mission').addClass('d-none');
     // changeStationWidth();
 }
 
