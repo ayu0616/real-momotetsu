@@ -32,14 +32,13 @@ const createTable = () => {
             });
             let td4 = $('<td></td>', {
                 text: jsonMission[i],
-                'class': 'mission align-middles'
+                'class': 'mission align-middle d-none'
             });
             tr.append(td1, td2, td3, td4);
             tbody.append(tr);
             changeForcedColor(td3);
         }
     });
-    $('.mission').addClass('d-none');
     // changeStationWidth();
 }
 
