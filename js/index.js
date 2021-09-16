@@ -1,3 +1,12 @@
+// スマホかどうか判別する関数
+const isSmartPhone = () => {
+    if (navigator.userAgent.match(/iPhone | Android. + Mobile/)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 // containerの横幅を制限する
 (() => {
     $('.container').css('max-width', '750px')
@@ -7,12 +16,29 @@
 (() => {
     const col = 'col-sm-6'
     $('#card-container > div').addClass(`${col} mb-3`);
-    $(`#card-container > .${col} > div`).addClass('card').css('height', '100%');
+    $(`#card-container > .${col} > a`).addClass('text-dark text-decoration-none')
+    $(`#card-container > .${col} > a > div`).addClass('card').css('height', '100%');
     $('.card > img').addClass('card-img-top shadow-sm');
     $('.card > div').addClass('card-body position-relative');
     $('.card-body > h5').addClass('card-title');
     $('.card-body > p').addClass('card-text');
-    $('.card-body > a').addClass('btn btn-primary position-absolute').text('詳細はこちら').css('bottom', '1em').css('right', '1em');
+    // $('.card-body > a').addClass('btn btn-primary position-absolute').text('詳細はこちら').css('bottom', '1em').css('right', '1em');
+})();
+
+// hover時に影をつける
+(() => {
+    const shadow = 'shadow';
+    if(!isSmartPhone()) {
+        $('.card').on({
+            'mouseenter': function() {
+                $('.card').removeClass(shadow);
+                $(this).addClass(shadow);
+            },
+            'mouseleave': function() {
+                $('.card').removeClass(shadow);
+            }
+        });
+    }
 })();
 
 // 現在時刻などが入っているdivの高さを100%にする

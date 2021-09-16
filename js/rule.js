@@ -5,30 +5,22 @@ head.addClass('m-3');
 // ナビバーの高さを取得する
 const navHeight = $('.sticky-top').outerHeight();
 
-// 目次を固定する
-(function() {
-    const tocContainer = $('#toc-container');
-    const tocTop = tocContainer.offset().top;
-    tocContainer.css('top', tocTop);
-    tocContainer.css('position', 'sticky');
-})();
-
 // 見出しの高さを設定する関数を定義
-const setHeight = () => {
-    const windowHeight = $(window).height();
-    const tocTop = $('#toc').offset().top;
-    const tocHeight = windowHeight - tocTop;
-    $('#toc').height(tocHeight);
-}
+// const setHeight = () => {
+//     const windowHeight = $(window).height();
+//     const tocTop = $('#toc').offset().top;
+//     const tocHeight = windowHeight - tocTop;
+//     $('#toc').height(tocHeight);
+// }
 
 // 横並びか否かで見出しの高さを変更
-$(window).on('load resize', function() {
-    if($(window).width() > 575) {
-        setHeight();
-    } else {
-        $('#toc').height(`${$(window).height() / 3}`)
-    }
-});
+// $(window).on('load resize', function() {
+//     if($(window).width() > 575) {
+        // setHeight();
+    // } else {
+        // $('#toc').height(`${$(window).height() / 3}`);
+//     }
+// });
 
 // 見出しにidを振る関数を定義
 const addIdToHead = () => {
@@ -46,9 +38,9 @@ const createA = () => {
             text: headText,
             href: `#${headId}`
         });
-        a.css('color', 'black')
+        a.css('color', 'black');
         let li = $('<li></li>').append(a);
-        li.addClass('mb-2')
+        li.addClass('mb-2');
         $('#toc').append(li);
     });
 }
@@ -71,6 +63,20 @@ const setScroll = () => {
     });
 }
 
+addIdToHead();
+createA();
+setScroll();
+
+// 目次を固定する
+const stickToc = () => {
+    let tocContainer = $('#toc-container');
+    let tocTop = $('.navbar').outerHeight() + 16;
+    tocContainer.css('top', tocTop);
+    tocContainer.css('position', 'sticky');
+}
+
+$(window).on('load resize', stickToc);
+
 // ルールの各見出しについてクラスを追加する
 (function() {
     $('#rule-container > div').addClass('my-3 border border-danger rounded');
@@ -83,12 +89,8 @@ const setScroll = () => {
 
 // olタグにm-3クラスを追加し、paddingを1.5emにする
 (function() {
-    $('#rule-container ol').addClass('m-3').css('padding-left', '1.5em')
+    $('#rule-container ol').addClass('m-3').css('padding-left', '1.5em');
 })();
-
-addIdToHead()
-createA()
-setScroll()
 
 // 「TOPに戻るボタン」を押したときの動作
 $(function() {
@@ -111,5 +113,35 @@ $(function() {
 
 // containerの下に余白をつくる（上に戻るボタンの都合上）
 (() => {
-    $('body > .container').css('margin-bottom', '80px')
+    $('#rule-container').css('margin-bottom', '80px');
 })();
+
+// JSONを読み込む
+let cardJson;
+$.getJSON('json/カード一覧.json', function(data) {
+    cardJson = data;
+    showCardTable(data);
+});
+
+// カード表を表示する関数を定義
+const showCardTable = (json) => {
+    const cardNameJson = json.カード名;
+    const effectJson = json.効果;
+    const jsonLen = Object.keys(cardNameJson).length;
+    for(i = 0; i < jsonLen; i ++) {
+        let cardTd = $('<td></td>', {
+            'class': 'card-name align-middle',
+            text: cardNameJson[i]
+        });
+
+        let effectTd = $('<td></td>', {
+            'class': 'effect align-middle',
+            text: effectJson[i]
+        });
+
+        let tr = $('<tr><tr>');
+        tr.append(cardTd, effectTd);
+
+        $('#card-table > tbody').append(tr);
+    }
+}

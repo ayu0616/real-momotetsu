@@ -52,7 +52,7 @@ const createTable = () => {
 }
 
 const changeForcedColor = (elem) => {
-    if(elem.text() != "") {
+    if(elem.html() != "") {
         elem.parent().addClass('table-warning');
     }
 }
@@ -96,7 +96,7 @@ $(document).on('click', 'tr[data-bs-toggle="modal"]', function() {
 // リストの見た目を調整する
 (() => {
     $('#description ol > li').addClass('mb-2');
-    $('#description ol').css('padding-left', '1.5em')
+    $('#description ol').css('padding-left', '1.5em');
 })();
 
 // 説明を固定する
