@@ -13,11 +13,13 @@ const createTable = () => {
         jsonForced = json.必ず下車;
         jsonMission = json.ミッション;
         len = Object.keys(jsonNumber).length - 1;
+        let forcedHtml
         for(i = 0; i <= len; i ++) {
             let tr = $('<tr></tr>', {
                 'data-bs-toggle': "modal",
                 'data-bs-target': `#modal`
             });
+
             let td1 = $('<td></td>', {
                 text: jsonNumber[i],
                 'class': 'number align-middle'
@@ -26,10 +28,17 @@ const createTable = () => {
                 text: jsonStation[i],
                 'class': 'station align-middle'
             });
+
+            if(jsonForced[i] == '★') {
+                forcedHtml = '<i class="bi bi-star-fill"></i>'
+            } else {
+                forcedHtml = jsonForced[i]
+            }
             let td3 = $('<td></td>', {
-                text: jsonForced[i],
                 'class': 'forced align-middle'
             });
+            td3.html(forcedHtml)
+
             let td4 = $('<td></td>', {
                 text: jsonMission[i],
                 'class': 'mission align-middle d-none'
