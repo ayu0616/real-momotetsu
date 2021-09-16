@@ -24,7 +24,9 @@ const sleep = (sec) => {
 // サイコロをふる関数を定義
 const rollDice = async (n) => {
     $('#btn').attr('disabled', '');
+    $('#reset-station-btn').attr('disabled', '');
     $('#station-select').attr('disabled', '');
+
     const container = $(`#dice-container${n}`);
     const result = $('<img>', {
         id: `dice${n}`,
@@ -70,6 +72,8 @@ const onClick = async () => {
     await nRoll(2);
     await sleep(1);
     sumNumber();
+    await sleep(1);
+    scrollToResult();
 }
 
 // 結果をテキストに出力する関数を定義する
@@ -110,7 +114,19 @@ $.getJSON("/json/山陽本線（岡山→宮島口）.json", function(data) {
         });
         $('#station-select').append(option);
     }
+    selectStationByStorage();
+    changeBtn();
 });
+
+// ローカルストレージから駅名を取得し選択する関数を定義
+const selectStationByStorage = () => {
+    const currentStationNum = localStorage.getItem('stationNum');
+    if(currentStationNum != null) {
+        $('option[selected]').removeAttr('selected');
+        $(`option[value="${currentStationNum}"]`).attr('selected', '');
+        $('#station-select').attr('disabled', '');
+    }
+}
 
 // 合計値と次に下車する駅を出力する関数を定義
 const sumNumber = () => {
@@ -131,25 +147,85 @@ const sumNumber = () => {
             }
         }
 
-        console.log(setNextStationNum());
-        const nextStation = $(`#station-select > option[value="${setNextStationNum()}"]`).text();
-        const resultText = `合計：${sum}<br>次の駅：${nextStation}`;
+        const nextStationNum = setNextStationNum();
+        const nextStation = $(`#station-select > option[value="${nextStationNum}"]`).text();
+        // const resultText = `合計：${sum}<br>次の駅：${nextStation}`;
+        const nextMissionHtml = `【ミッション】<br>${json.ミッション[nextStationNum]}`;
         $('#next-station').html(nextStation);
+        $('#next-mission').html(nextMissionHtml);
+
+        // ローカルストレージに追加
+        localStorage.setItem('stationNum', nextStationNum);
         resolve();
     });
 }
 
-// 駅を選択すると動作する関数
-$('#station-select').on('change', function() {
+// ボタンを押せる／押せないようにする関数を定義
+const changeBtn = () => {
+    const currentMissionHtml = (num) => {return `【ミッション】<br>${json.ミッション[num]}`;}
     if($('#station-select option:selected').text() == "現在の駅を選択") {
         $('#btn').attr('disabled', '');
         $('#current-station').text('');
+        $('#current-mission').html('');
     } else {
         $('#btn').removeAttr('disabled');
-        $('#current-station').text($('#station-select option:selected').text());
+        const selectedElem = $('#station-select option:selected');
+        $('#current-station').text(selectedElem.text());
+        $('#current-mission').html(currentMissionHtml(selectedElem.attr('value')));
+    }
+}
+
+// 駅を選択すると動作
+$('#station-select').on('change', changeBtn);
+
+// 結果表示欄までスクロール
+const scrollToResult = () => {
+    const resultHeight = $('#current-station-col').offset().top;
+    const navHeight = $('.navbar').outerHeight();
+    $('html, body').animate({scrollTop:resultHeight - navHeight - 2});
+}
+
+// 結果表示欄を装飾
+(() => {
+    $('#result-container > div.col > div').addClass('border border-danger rounded');
+    $('#result-container > div.col > div').css('height', '100%');
+    $('#result-container > div.col > div > div').addClass('m-3');
+})();
+
+// ウィンドウサイズに応じて結果欄の縦横を変更する
+$(window).on('load resize', function() {
+    const changeWidth = 550;
+    const windowWidth = $(window).width();
+
+    if(windowWidth < changeWidth) {
+        $('#result-container').addClass('row-cols-1');
+        $('#arrow').removeClass('col-1');
+        $('#arrow').addClass('col');
+        $('#arrow').html('<i class="bi bi-chevron-double-down"></i>')
+    } else {
+        $('#result-container').removeClass('row-cols-1');
+        $('#arrow').removeClass('col');
+        $('#arrow').addClass('col-1');
+        $('#arrow').html('<i class="bi bi-chevron-double-right"></i>');
     }
 });
 
+// 現在の駅をリセットする関数を定義
+const resetStation = () => {
+    if(confirm('本当にリセットしますか？？？？？？？')) {
+        localStorage.removeItem('stationNum');
+        $('option[selected]').removeAttr('selected');
+        $('#current-station').text('');
+        $('option:first-child').attr('selected', '');
+        $('#station-select').removeAttr('disabled');
+        $('#reset-station-btn').attr('disabled', '')
+        changeBtn();
+    }
+}
+
+// ローカルストレージがないときは駅リセットボタンを押せないようにする
 (() => {
-    $('#result-container > div').addClass('col');
+    if(localStorage.getItem('stationNum') == null) {
+        $('#reset-station-btn').attr('disabled', '')
+    }
 })();
