@@ -99,15 +99,15 @@ $(document).on('click', 'tr[data-bs-toggle="modal"]', function() {
     $('#description ol').css('padding-left', '1.5em');
 })();
 
-// 説明を固定する
-(() => {
-    // 説明欄の最上部の高さを取得する
-    const des = $('#description');
-    const desTop = des.offset().top;
-    // 説明欄を固定する
+// 目次を固定する
+const stickDes = () => {
+    let des = $('#description');
+    let desTop = $('.navbar').outerHeight() + 16;
     des.css('top', desTop);
-    des.css('position', 'sticky')
-})();
+    des.css('position', 'sticky');
+}
+
+$(window).on('load resize', stickDes);
 
 // エンターキーを押したとき、OKボタンを押す
 $(document).keypress(function(e) {

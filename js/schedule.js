@@ -99,33 +99,15 @@ const timeSchedule = (hour, minute, content) => {
 // スケジュールのh2タグをheadとする
 const head = $('#schedule-container h2');
 
-// ナビバーの高さを取得する
-const navHeight = $('.sticky-top').outerHeight();
-
 // 目次を固定する
-(() => {
-    const tocContainer = $('#toc-container');
-    const tocTop = tocContainer.offset().top;
+const stickToc = () => {
+    let tocContainer = $('#toc-container');
+    let tocTop = $('.navbar').outerHeight() + 16;
     tocContainer.css('top', tocTop);
     tocContainer.css('position', 'sticky');
-})();
-
-// 目次の高さを設定する関数を定義
-const setHeight = () => {
-    const windowHeight = $(window).height();
-    const tocTop = $('#toc').offset().top;
-    const tocHeight = windowHeight - tocTop;
-    $('#toc').height(tocHeight);
 }
 
-// 横並びか否かで目次の高さを変更
-$(window).on('load resize', function() {
-    if($(window).width() > 575) {
-        setHeight();
-    } else {
-        $('#toc').height(`${$(window).height() / 3}`)
-    }
-});
+$(window).on('load resize', stickToc);
 
 // 目次にidを振る関数を定義
 (() => {
