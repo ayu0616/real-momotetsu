@@ -139,38 +139,75 @@ const sumNumber = () => {
         });
         const selectedVal = Number($('#station-select option:selected').val());
 
-        const setNextStationNum = () => {
-            if(selectedVal + sum > $('#station-select > option[value]').length - 1) {
-                return $('#station-select > option[value]').length - 1;
-            } else {
-                return selectedVal + sum;
-            }
-        }
-
-        const nextStationNum = setNextStationNum();
+        const nextStationNum = setNextStationNum(sum, selectedVal);
         const nextStation = $(`#station-select > option[value="${nextStationNum}"]`).text();
         // const resultText = `合計：${sum}<br>次の駅：${nextStation}`;
         const nextMissionHtml = `【ミッション】<br>${json.ミッション[nextStationNum]}`;
         $('#next-station').html(nextStation);
         $('#next-mission').html(nextMissionHtml);
 
-        // 現在の駅ナンバーをローカルストレージに追加
-        localStorage.setItem('stationNum', nextStationNum);
-
-        // 現在の駅ナンバーをこれまで訪れた駅のローカルストレージに追加
-        const visitedKey = 'visitedList'
-        let visitedList = localStorage.getItem(visitedKey);
-        if(visitedList == null) {
-            visitedList = [selectedVal];
-            localStorage.setItem(visitedKey, JSON.stringify(visitedList));
-        } else {
-            visitedList = JSON.parse(visitedList);
-            visitedList.push(selectedVal);
-            localStorage.setItem(visitedKey, JSON.stringify(visitedList));
-        }
+        addLocalStorage(nextStationNum, selectedVal);
 
         resolve();
     });
+}
+
+// 必ず停まる駅を取得
+const getForcedList = () => {
+    const jsonForced = json.必ず下車;
+    const forcedList = []
+    // const jsonLen = Object.keys(jsonForced).length;
+    $.each(jsonForced, function(index, value) {
+        if(value != null) {
+            forcedList.push(index);
+        }
+    });
+    return forcedList;
+}
+
+// 2数が配列の同じ隙間に存在するかどうかを判別する関数を定義
+const isNextForced = (n1, n2, array) => {
+    const n1Num = Number(n1);
+    const n2Num = Number(n2);
+    for(i = 0; i < array.length; i ++) {
+        let valueNum = Number(array[i]);
+        if(n1Num < valueNum && valueNum < n2Num) {
+            return valueNum;
+        }
+    };
+    return false;
+}
+
+// 駅ナンバーを決める関数を定義
+const setNextStationNum = (sumDice, selectedVal) => {
+    const sum = sumDice + selectedVal
+    const condition1 = isNextForced(selectedVal, sum, getForcedList())
+    const condition2 = sum > $('#station-select > option[value]').length - 1;
+    if(condition1) {
+        return condition1
+    } else if(condition2) {
+        return $('#station-select > option[value]').length - 1;
+    } else {
+        return sum;
+    }
+}
+
+// ローカルストレージに追加する関数を定義
+const addLocalStorage = (nextStationNum, selectedVal) => {
+    // 現在の駅ナンバーをローカルストレージに追加
+    localStorage.setItem('stationNum', nextStationNum);
+
+    // 現在の駅ナンバーをこれまで訪れた駅のローカルストレージに追加
+    const visitedKey = 'visitedList'
+    let visitedList = localStorage.getItem(visitedKey);
+    if(visitedList == null) {
+        visitedList = [selectedVal];
+        localStorage.setItem(visitedKey, JSON.stringify(visitedList));
+    } else {
+        visitedList = JSON.parse(visitedList);
+        visitedList.push(selectedVal);
+        localStorage.setItem(visitedKey, JSON.stringify(visitedList));
+    }
 }
 
 // ボタンを押せる／押せないようにする関数を定義
@@ -227,6 +264,7 @@ $(window).on('load resize', function() {
 const resetStation = () => {
     if(confirm('本当にリセットしますか？？？？？？？')) {
         localStorage.removeItem('stationNum');
+        localStorage.removeItem('visitedList')
         $('option[selected]').removeAttr('selected');
         $('#current-station').text('');
         $('option:first-child').attr('selected', '');
