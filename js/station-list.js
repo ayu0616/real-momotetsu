@@ -64,7 +64,7 @@ const changeVisitedColor = (elem) => {
     let visitedList = localStorage.getItem(visitedKey);
     visitedList = JSON.parse(visitedList);
     const stationNum = Number(elem.text());
-    if(visitedList != null & visitedList.includes(stationNum)) {
+    if(visitedList != null && visitedList.includes(stationNum)) {
         elem.parent().removeClass('table-warning');
         elem.parent().addClass('table-success');
     }
@@ -74,7 +74,7 @@ const changeNextStationColor = (elem) => {
     const key = 'stationNum'
     let nextNum = localStorage.getItem(key);
     const stationNum = Number(elem.text());
-    if(nextNum != null & nextNum == stationNum) {
+    if(nextNum != null && nextNum == stationNum) {
         elem.parent().removeClass('table-warning');
         elem.parent().removeClass('table-success');
         elem.parent().addClass('table-danger');
