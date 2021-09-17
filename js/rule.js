@@ -2,9 +2,6 @@
 const head = $('#rule-container h2');
 head.addClass('m-3');
 
-// ナビバーの高さを取得する
-const navHeight = $('.sticky-top').outerHeight();
-
 // 見出しの高さを設定する関数を定義
 // const setHeight = () => {
 //     const windowHeight = $(window).height();
@@ -55,6 +52,8 @@ const setScroll = () => {
         var href= $(this).attr("href");
         // 移動先を取得
         var target = $(href == "#" || href == "" ? 'html' : href);
+        // ナビバーの高さを取得する
+        const navHeight = $('.sticky-top').outerHeight();
         // 移動先を数値で取得
         var position = target.offset().top - navHeight - 17;
         // スムーススクロール
@@ -120,28 +119,57 @@ $(function() {
 let cardJson;
 $.getJSON('json/カード一覧.json', function(data) {
     cardJson = data;
-    showCardTable(data);
+    showCardList(data);
 });
 
 // カード表を表示する関数を定義
-const showCardTable = (json) => {
+const showCardList = (json) => {
     const cardNameJson = json.カード名;
     const effectJson = json.効果;
     const jsonLen = Object.keys(cardNameJson).length;
+
+    const createAccordionHeader = (n) => {
+        const button = $('<button></button>', {
+            'class': "accordion-button collapsed p-3",
+            type: "button",
+            'data-bs-toggle': "collapse",
+            'data-bs-target': `#collapse${n}`,
+            'aria-expanded': "false",
+            'aria-controls': `collapse${n}`,
+            text: cardNameJson[n]
+        });
+
+        const h2 = $('<h2></h2>', {
+            'class': 'accordion-header',
+            id: `heading${n}`
+        });
+
+        return h2.append(button);
+    }
+
+    const createAccordionBody = (n) => {
+        const accordionBody = $('<div></div>', {
+            'class': 'accordion-body p-3'
+        });
+        const bodyHtml = effectJson[n].split('\n').join('<br>');
+        accordionBody.html(bodyHtml);
+
+        const accordionCollapse = $('<div></div>', {
+            id: `collapse${n}`,
+            'class': 'accordion-collapse collapse',
+            'aria-labelledby': `heading${n}`,
+            'data-bs-parent': '#card-list'
+        });
+
+        return accordionCollapse.append(accordionBody);
+    }
+
+    const createAccordionItem = () => {
+        return $('<div></div>', {'class': 'accordion-item'});
+    }
+
     for(i = 0; i < jsonLen; i ++) {
-        let cardTd = $('<td></td>', {
-            'class': 'card-name align-middle',
-            text: cardNameJson[i]
-        });
-
-        let effectTd = $('<td></td>', {
-            'class': 'effect align-middle',
-            text: effectJson[i]
-        });
-
-        let tr = $('<tr><tr>');
-        tr.append(cardTd, effectTd);
-
-        $('#card-table > tbody').append(tr);
+        let item = createAccordionItem().append(createAccordionHeader(i), createAccordionBody(i));
+        $('#card-list').append(item);
     }
 }

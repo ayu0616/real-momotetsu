@@ -46,6 +46,8 @@ const createTable = () => {
             tr.append(td1, td2, td3, td4);
             tbody.append(tr);
             changeForcedColor(td3);
+            changeVisitedColor(td1);
+            changeNextStationColor(td1);
         }
     });
     // changeStationWidth();
@@ -54,6 +56,28 @@ const createTable = () => {
 const changeForcedColor = (elem) => {
     if(elem.html() != "") {
         elem.parent().addClass('table-warning');
+    }
+}
+
+const changeVisitedColor = (elem) => {
+    const visitedKey = 'visitedList'
+    let visitedList = localStorage.getItem(visitedKey);
+    visitedList = JSON.parse(visitedList);
+    const stationNum = Number(elem.text());
+    if(visitedList.includes(stationNum)) {
+        elem.parent().removeClass('table-warning');
+        elem.parent().addClass('table-success');
+    }
+}
+
+const changeNextStationColor = (elem) => {
+    const key = 'stationNum'
+    let nextNum = localStorage.getItem(key);
+    const stationNum = Number(elem.text());
+    if(nextNum == stationNum) {
+        elem.parent().removeClass('table-warning');
+        elem.parent().removeClass('table-success');
+        elem.parent().addClass('table-danger');
     }
 }
 
@@ -96,6 +120,7 @@ $(document).on('click', 'tr[data-bs-toggle="modal"]', function() {
 // リストの見た目を調整する
 (() => {
     $('#description ol > li').addClass('mb-2');
+    $('#description ol').addClass('m-0');
     $('#description ol').css('padding-left', '1.5em');
 })();
 

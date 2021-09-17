@@ -80,6 +80,7 @@ const timeSchedule = (hour, minute, content) => {
     // 1日目のスケジュール
     scheduleDay = 1;
     timeSchedule(8, 0, 'JR西宮駅に集合');
+    timeSchedule(9, 0, '淡路サービスエリア')
     timeSchedule(20, 0, '岡山のホテルに到着');
 
     // 2日目のスケジュール
@@ -90,7 +91,7 @@ const timeSchedule = (hour, minute, content) => {
 
     // 3日目のスケジュール
     scheduleDay = 3;
-    timeSchedule(7, 0, '起床')
+    timeSchedule(7, 0, '起床');
 })();
 // スケジュールここまで
 
@@ -142,6 +143,8 @@ $(window).on('load resize', stickToc);
         var href= $(this).attr("href");
         // 移動先を取得
         var target = $(href == "#" || href == "" ? 'html' : href);
+        // ナビバーの高さを取得する
+        const navHeight = $('.sticky-top').outerHeight();
         // 移動先を数値で取得
         var position = target.offset().top - navHeight - 17;
         // スムーススクロール

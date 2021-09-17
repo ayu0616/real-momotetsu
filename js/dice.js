@@ -154,8 +154,21 @@ const sumNumber = () => {
         $('#next-station').html(nextStation);
         $('#next-mission').html(nextMissionHtml);
 
-        // ローカルストレージに追加
+        // 現在の駅ナンバーをローカルストレージに追加
         localStorage.setItem('stationNum', nextStationNum);
+
+        // 現在の駅ナンバーをこれまで訪れた駅のローカルストレージに追加
+        const visitedKey = 'visitedList'
+        let visitedList = localStorage.getItem(visitedKey);
+        if(visitedList == null) {
+            visitedList = [selectedVal];
+            localStorage.setItem(visitedKey, JSON.stringify(visitedList));
+        } else {
+            visitedList = JSON.parse(visitedList);
+            visitedList.push(selectedVal);
+            localStorage.setItem(visitedKey, JSON.stringify(visitedList));
+        }
+
         resolve();
     });
 }
