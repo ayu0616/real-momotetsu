@@ -42,3 +42,10 @@ showNavList();
 (() => {
     $('nav[class*="navbar"]').addClass('shadow-sm');
 })();
+
+// 装飾
+(() => {
+    $('.border').each(function() {
+        $(this).css('border-color', 'pink !important');
+    });
+})();

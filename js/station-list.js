@@ -13,7 +13,7 @@ const createTable = () => {
         jsonForced = json.必ず下車;
         jsonMission = json.ミッション;
         len = Object.keys(jsonNumber).length - 1;
-        let forcedHtml
+        let forcedHtml;
         for(i = 0; i <= len; i ++) {
             let tr = $('<tr></tr>', {
                 'data-bs-toggle': "modal",
@@ -114,8 +114,21 @@ $(document).on('click', 'tr[data-bs-toggle="modal"]', function() {
     });
     p.html(`【ミッション】<br>${mission}`);
     $('#modal-label').text(labelText);
-    $('.modal-body').html('').prepend(modalImage(stationNumber)).append(p);
+    $('.modal-body').html('').prepend(showMissionChallenging($(this)), modalImage(stationNumber)).append(p);
 });
+
+// ミッション挑戦中の表示をmodalの中に表示する関数を定義
+const showMissionChallenging = (elem) => {
+    if(elem.attr('class') == 'table-danger') {
+        const div = $('<div></div>', {
+            'class': 'alert alert-danger mb-3',
+            role: 'alert',
+            text: 'ミッション挑戦中！'
+        });
+        div.prepend('<i class="bi bi-check2"></i>')
+        return div
+    }
+}
 
 // リストの見た目を調整する
 (() => {

@@ -9,7 +9,7 @@
         src: "/images/white.png",
         alt: "真っ白な画像",
         width: '100%',
-        'class': 'border border-danger rounded'
+        'class': 'border border-pink rounded'
     });
     $('div[id^="dice-container"]').append(white);
 })();
@@ -141,8 +141,19 @@ const sumNumber = () => {
 
         const nextStationNum = setNextStationNum(sum, selectedVal);
         const nextStation = $(`#station-select > option[value="${nextStationNum}"]`).text();
-        // const resultText = `合計：${sum}<br>次の駅：${nextStation}`;
         const nextMissionHtml = `【ミッション】<br>${json.ミッション[nextStationNum]}`;
+
+        // 次の駅が必ず下車する駅ならそのことを表示する
+        if(getForcedList().includes(String(nextStationNum))) {
+            const forcedDiv = $('<div></div>', {
+                text: '次は必ず下車する駅',
+                'class': 'alert alert-warning alert-dismissible my-2 fade show',
+                role: 'alert'
+            });
+            forcedDiv.append('<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>')
+            $('#next-station-col > div > div > h2').after(forcedDiv);
+        }
+
         $('#next-station').html(nextStation);
         $('#next-mission').html(nextMissionHtml);
 
@@ -155,7 +166,7 @@ const sumNumber = () => {
 // 必ず停まる駅を取得
 const getForcedList = () => {
     const jsonForced = json.必ず下車;
-    const forcedList = []
+    const forcedList = [];
     // const jsonLen = Object.keys(jsonForced).length;
     $.each(jsonForced, function(index, value) {
         if(value != null) {
@@ -184,7 +195,7 @@ const setNextStationNum = (sumDice, selectedVal) => {
     const condition1 = isNextForced(selectedVal, sum, getForcedList())
     const condition2 = sum > $('#station-select > option[value]').length - 1;
     if(condition1) {
-        return condition1
+        return condition1;
     } else if(condition2) {
         return $('#station-select > option[value]').length - 1;
     } else {
@@ -237,9 +248,10 @@ const scrollToResult = () => {
 
 // 結果表示欄を装飾
 (() => {
-    $('#result-container > div.col > div').addClass('border border-danger rounded');
+    $('#result-container > div.col > div').addClass('border border-pink rounded');
     $('#result-container > div.col > div').css('height', '100%');
     $('#result-container > div.col > div > div').addClass('m-3');
+    $('div[id*="station-col"] > div > div > p').addClass('my-2');
 })();
 
 // ウィンドウサイズに応じて結果欄の縦横を変更する
@@ -251,12 +263,14 @@ $(window).on('load resize', function() {
         $('#result-container').addClass('row-cols-1');
         $('#arrow').removeClass('col-1');
         $('#arrow').addClass('col');
-        $('#arrow').html('<i class="bi bi-chevron-double-down"></i>')
+        $('#arrow-icon').removeClass('bi-chevron-double-right');
+        $('#arrow-icon').addClass('bi-chevron-double-down');
     } else {
         $('#result-container').removeClass('row-cols-1');
         $('#arrow').removeClass('col');
         $('#arrow').addClass('col-1');
-        $('#arrow').html('<i class="bi bi-chevron-double-right"></i>');
+        $('#arrow-icon').removeClass('bi-chevron-double-down');
+        $('#arrow-icon').addClass('bi-chevron-double-right');
     }
 });
 

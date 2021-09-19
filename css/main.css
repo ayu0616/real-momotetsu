@@ -40,3 +40,8 @@ div[id^='dice-container'] > img {
     height: 60px;
     opacity: 75%;
 }
+
+.border-pink {
+    border-color: pink !important;
+    border-width: 2px !important;
+}

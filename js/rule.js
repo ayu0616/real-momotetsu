@@ -78,7 +78,7 @@ $(window).on('load resize', stickToc);
 
 // ルールの各見出しについてクラスを追加する
 (function() {
-    $('#rule-container > div').addClass('my-3 border border-danger rounded');
+    $('#rule-container > div').addClass('my-3 border border-pink rounded');
 })();
 
 // ルールのliタグに下のmarginを追加する
