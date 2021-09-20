@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <!-- 以下各ページ共通 -->
 
@@ -22,6 +23,7 @@
     <meta name="description" content="2022年春開催予定の「リアル桃鉄」の情報を掲載したWEBサイトです。">
     <title>TOP-PAGE - REAL-MOMOTETSU</title>
 </head>
+
 <body>
     <nav class="navbar sticky-top navbar-expand-sm navbar-light bg-light">
         <div class="container-fluid">
@@ -69,7 +71,7 @@
             <div class="col-sm-6">
                 <div class="border border-pink rounded text-center">
                     <h2 class="m-3">挑戦中のミッション駅</h2>
-                    <div class="mx-3 d-flex flex-column justify-content-center">
+                    <div class="m-3 d-flex flex-column justify-content-center">
                         <h3 id="current-station-name">〇〇駅</h3>
                         <p id="current-mission" class="m-0">【ミッション】<br></p>
                     </div>
@@ -78,19 +80,18 @@
             <div class="col-sm-6">
                 <div class="border border-pink rounded text-center">
                     <h2 class="m-3">これまで訪れた駅</h2>
-                    <ul id="visited-station-list" class="m-3 text-start list-group list-group-flush"></ul>
+                    <div id="visited-station-list" class="m-3 text-start row row-cols-2"></div>
                 </div>
             </div>
         </div>
-        <div class="row row-cols-2" id="card-container">
+        <div class="row row-cols-1" id="card-container">
             <div id="station-list-card">
                 <a href="station-list.html">
                     <div>
-                        <img src="/images/tokyo_eki.png" alt="東京駅の写真">
+                        <img src="/images/tokyo_eki.jpg" alt="東京駅の写真">
                         <div>
                             <h5>駅リスト</h5>
                             <p>今回の旅で訪れる駅のリスト。せっかく考えたミッション、半分以上は挑戦されることはないんだろうな。</p>
-                            <!-- <a href="station-list.html"></a> -->
                         </div>
                     </div>
                 </a>
@@ -98,11 +99,10 @@
             <div id="dice-card">
                 <a href="dice.html">
                     <div>
-                        <img src="/images/dice-irasutoya.png" alt="サイコロの写真">
+                        <img src="/images/dice-irasutoya.jpg" alt="サイコロの写真">
                         <div>
                             <h5>サイコロ</h5>
                             <p>自動でサイコロを振ってくれる。次にどの駅に止まるべきかも教えてくれる。コンピューターに自らの行動を決定されるって近未来的だね。</p>
-                            <!-- <a href="dice.html"></a> -->
                         </div>
                     </div>
                 </a>
@@ -110,11 +110,10 @@
             <div id="rule-card">
                 <a href="rule.html">
                     <div>
-                        <img src="/images/book_law_roppouzensyo.png" alt="六法全書の写真">
+                        <img src="/images/book_law_roppouzensyo.jpg" alt="六法全書の写真">
                         <div>
                             <h5>ルール</h5>
                             <p>「リアル桃鉄」のルールを記載している。こんな長ったらしいもの読みたくないよね。なんでこんなモノ作っちゃったんだろ...。</p>
-                            <!-- <a href="rule.html"></a> -->
                         </div>
                     </div>
                 </a>
@@ -122,16 +121,14 @@
             <div id="schedule-card">
                 <a href="schedule.html">
                     <div>
-                        <img src="/images/techou_open.png" alt="">
+                        <img src="/images/techou_open.jpg" alt="">
                         <div>
                             <h5>スケジュール</h5>
                             <p>スケジュール、それは単なる空想に過ぎない。これが実現することはめったにない。めったにないけどつくるだけつくっときました。</p>
-                            <!-- <a href="schedule.html"></a> -->
                         </div>
                     </div>
                 </a>
             </div>
-
         </div>
     </div>
 
@@ -143,6 +140,8 @@
     <script type="text/javascript" src="/js/main.js"></script>
     <script type="text/javascript" src="/js/index.js"></script>
     <!-- Bootstrap読み込み -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous">
+    </script>
 </body>
+
 </html>
