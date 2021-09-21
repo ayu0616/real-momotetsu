@@ -76,25 +76,24 @@ const h2OneLine = () => {
 })();
 
 // カードの写真のサイズを変更する関数を定義
-const changeCardImageSize = () => {
+const changeCardImageSize = (windowWidth) => {
     const card = $(".card");
     const heightList = [];
     card.each(function () {
+        $(this).children(".card-img-top").addClass("d-none");
         heightList.push($(this).height());
+        $(this).children(".card-img-top").removeClass("d-none");
     });
 
+    const size = Math.min.apply(null, heightList);
+    const maxWidth = $(".card").width() / 3;
+
     card.each(function () {
-        $(this).children(".card-img-top").addClass("d-none");
-
-        const size = Math.min.apply(null, heightList);
-        $(this)
-            .children(".card-img-top")
-            .width(size)
-            .height(size)
-            .css("max-height", $(window).width() / 3)
-            .css("max-width", $(window).width() / 3);
-
-        $(this).children(".card-img-top").removeClass("d-none");
+        if (size < maxWidth) {
+            $(this).children(".card-img-top").width(size).height(size);
+        } else {
+            $(this).children(".card-img-top").width(maxWidth).height(maxWidth);
+        }
     });
 };
 // ウィンドウサイズが変わったときに動作
@@ -106,7 +105,7 @@ $(window).on("load resize", function () {
     const windowHeight = $(window).height();
 
     // カードの写真のサイズを変更
-    changeCardImageSize();
+    changeCardImageSize(windowWidth);
 
     // 追加／削除するclass
     const timeContainerClass = "border rounded mx-0 mb-3";
@@ -166,22 +165,31 @@ $.getJSON("/json/山陽本線（岡山→宮島口）.json", function (data) {
 // 「挑戦中のミッション駅」を表示する関数を定義
 const showMissionStation = () => {
     const stationNum = localStorage.getItem("stationNum");
-    const stationName = jsonStation[stationNum];
-    const stationText = `${stationNum}. ${stationName}`;
-    $("#current-station-name").text(stationText);
+    if (stationNum == null) {
+        $("#current-station-name").text('未開始');
+        $("#current-mission").html('サイコロを回すとこの欄に駅が表示されます');
+    } else {
+        const stationName = jsonStation[stationNum];
+        const stationText = `${stationNum}. ${stationName}`;
+        $("#current-station-name").text(stationText);
 
-    const stationMission = jsonMission[stationNum];
-    $("#current-mission").append(stationMission);
+        const stationMission = jsonMission[stationNum];
+        $("#current-mission").append(stationMission);
+    }
 };
 
 // 「これまで訪れた駅」を表示する関数を定義
 const showVisitedStations = () => {
     const stationNums = JSON.parse(localStorage.getItem("visitedList"));
-    $.each(stationNums, function (index, value) {
-        const div = $("<div></div>", {
-            text: `${value}. ${jsonStation[value]}`,
-            class: "col p-1 border-bottom",
+    if (stationNums == null) {
+        $("#visited-station-list").parent().append("<p>サイコロを回すとこの欄に駅が表示されます</p>");
+    } else {
+        $.each(stationNums, function (index, value) {
+            const div = $("<div></div>", {
+                text: `${value}. ${jsonStation[value]}`,
+                class: "col p-1 border-bottom",
+            });
+            $("#visited-station-list").append(div);
         });
-        $("#visited-station-list").append(div);
-    });
+    }
 };
