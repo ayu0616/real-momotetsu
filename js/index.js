@@ -86,7 +86,7 @@ const changeCardImageSize = (windowWidth) => {
     });
 
     const size = Math.min.apply(null, heightList);
-    const maxWidth = $(".card").width() / 3;
+    const maxWidth = $(".card").width() * 3 / 10;
 
     card.each(function () {
         if (size < maxWidth) {

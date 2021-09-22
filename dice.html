@@ -48,11 +48,21 @@
         <div class="row my-3">
             <div class="col-sm-7 align-self-center">
                 <select id="station-select" class="form-select">
-                    <option selected>現在の駅を選択</option>
+                    <!-- <option selected>現在の駅を選択</option> -->
                 </select>
             </div>
             <div class="col text-end">
-                <button id="btn" type="button" class="btn btn-lg btn-primary w-100" onclick="onClick()" disabled>サイコロをふる</button>
+                <div class="btn-group w-100" role="group">
+                    <button id="restore-backup-btn" type="button" class="btn btn-lg btn-warning" onclick="restoreBackUp()">
+                        <i class="bi bi-server"></i>
+                    </button>
+                    <button id="reset-station-btn" type="button" class="btn btn-lg btn-danger" onclick="resetStation()">
+                        <i class="bi bi-trash-fill"></i>
+                    </button>
+                    <button id="btn" type="button" class="btn btn-lg btn-primary" onclick="onClick()" disabled>
+                        <i class="bi bi-dice-6-fill"></i>
+                    </button>
+                </div>
             </div>
         </div>
         <div class="row mt-5 mb-3" id="result-container">
@@ -81,10 +91,6 @@
         </div>
         <div class="row">
             <div class="col text-end">
-                <div class="btn-group" role="group">
-                    <button id="restore-backup-btn" type="button" class="btn btn-warning" onclick="restoreBackUp()">バックアップを復元</button>
-                    <button id="reset-station-btn" type="button" class="btn btn-danger" onclick="resetStation()">駅をリセット</button>
-                </div>
             </div>
         </div>
     </div>

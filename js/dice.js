@@ -25,6 +25,7 @@ const sleep = (sec) => {
 const rollDice = async (n) => {
     $("#btn").attr("disabled", "");
     $("#reset-station-btn").attr("disabled", "");
+    $("restore-backup-btn").attr("disabled", "");
     $("#station-select").attr("disabled", "");
 
     const container = $(`#dice-container${n}`);
@@ -96,9 +97,9 @@ const toText = (result, n) => {
 const replaceBtn = () => {
     const reloadBtn = $("<button></button>", {
         type: "button",
-        class: "btn btn-lg btn-warning w-100",
+        class: "btn btn-lg btn-success",
         onclick: "reloadPage()",
-        text: "リロード",
+        html: "<i class='bi bi-arrow-clockwise'></i>",
         id: "btn",
     });
     $("#btn").replaceWith(reloadBtn);
@@ -159,7 +160,7 @@ const sumNumber = () => {
         // 次の駅が必ず下車する駅ならそのことを表示する
         if (getForcedList().includes(String(nextStationNum))) {
             const forcedDiv = $("<div></div>", {
-                text: "次は必ず下車する駅",
+                html: "<i class='bi bi-exclamation-triangle-fill'></i> 次は必ず下車する駅",
                 class: "alert alert-warning alert-dismissible my-2 fade show",
                 role: "alert",
             });
@@ -321,6 +322,7 @@ const restoreBackUp = () => {
     }
 };
 
+// ボタンを押せる／押せないようにする
 (() => {
     // ローカルストレージがないときは駅リセットボタンを押せないようにする
     if (localStorage.getItem("stationNum") == null) {
@@ -340,21 +342,22 @@ const createChangeNav = (currentStation, nextStation) => {
         class: "btn btn-primary",
         role: "button",
         href: navLink,
-        text: "乗換案内",
+        html: "<i class='bi bi-info-circle-fill'></i> 乗換案内",
         target: "_blank",
         rel: "noopener noreferrer",
     });
     return aButton;
 };
 
+// ボタンのmarginを変更する関数を定義
 const setBtnMargin = () => {
     const changeWidth = 575;
     const windowWidth = $(window).width();
 
     if (windowWidth <= changeWidth) {
-        $("#btn").addClass("mt-3");
+        $(".btn-group").addClass("mt-3");
     } else {
-        $("#btn").removeClass("mt-3");
+        $(".btn-group").removeClass("mt-3");
     }
 }
 

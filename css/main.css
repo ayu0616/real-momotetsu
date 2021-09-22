@@ -29,16 +29,16 @@ div[id^='dice-container']>img {
 }
 
 .page-top {
-    position: fixed;
     margin: 0px;
-    bottom: 20px;
-    right: 20px;
+    font-size: 60px;
 }
 
-.page-top a img {
+.page-top>a>i::before {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
     width: 60px;
     height: 60px;
-    opacity: 75%;
 }
 
 .border-pink {
