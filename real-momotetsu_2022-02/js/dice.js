@@ -113,7 +113,7 @@ const reloadPage = () => {
 
 // 駅名の選択肢を追加する
 let json;
-$.getJSON("../json/山陽本線（岡山→宮島口）.json", function (data) {
+$.getJSON("./json/山陽本線（岡山→宮島口）.json", function (data) {
     json = data;
     const jsonNumber = json.Number;
     const jsonStation = json.駅;

@@ -6,7 +6,7 @@ let jsonMission;
 
 const createTable = () => {
     const tbody = $('#tbody');
-    $.getJSON("../json/山陽本線（岡山→宮島口）.json", function(data) {
+    $.getJSON("./json/山陽本線（岡山→宮島口）.json", function(data) {
         json = data
         jsonNumber = json.Number;
         jsonStation = json.駅;
