@@ -6,7 +6,7 @@
 // 白画像を追加
 (() => {
     const white = $("<img>", {
-        src: "/images/white.png",
+        src: "./images/white.png",
         alt: "真っ白な画像",
         width: "100%",
         class: "border border-pink rounded",
@@ -36,11 +36,11 @@ const rollDice = async (n) => {
         class: "border border-pink rounded",
     });
     let rand = getRandomInt(6);
-    result.attr("src", `/images/dice${rand}.jpg`);
+    result.attr("src", `./images/dice${rand}.jpg`);
     container.children("img").replaceWith(result);
     for (i = 1; i <= 20; i++) {
         let rand = getRandomInt(6);
-        result.attr("src", `/images/dice${rand}.jpg`);
+        result.attr("src", `./images/dice${rand}.jpg`);
         await sleep(0.4);
     }
 };
@@ -65,7 +65,7 @@ const blinkImg = (n) => {
 const nRoll = async (n) => {
     await rollDice(n);
     await blinkImg(n);
-    const num = $(`#dice${n}`).attr("src").replace("/images/dice", "").replace(".jpg", "");
+    const num = $(`#dice${n}`).attr("src").replace("./images/dice", "").replace(".jpg", "");
     toText(num, n);
 };
 
@@ -146,7 +146,7 @@ const sumNumber = () => {
         let sum = 0;
         $('img[id^="dice"]').each(function () {
             let diceSrc = $(this).attr("src");
-            diceSrc = diceSrc.replace("/images/dice", "").replace(".jpg", "");
+            diceSrc = diceSrc.replace("./images/dice", "").replace(".jpg", "");
             sum += Number(diceSrc);
         });
         const selectedVal = Number($("#station-select option:selected").val());

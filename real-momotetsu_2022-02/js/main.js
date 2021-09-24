@@ -18,7 +18,7 @@ const navList = (title, url) => {
     });
     const a = $('<a></a>', {
         text: title,
-        href: url,
+        href: `./${url}`,
         'class': "align-middle nav-link active text-decoration-underline",
         'aria-current': "page"
     });
