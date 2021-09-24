@@ -90,7 +90,7 @@ createTable();
 
 // modalの中に表示する写真
 let imageUrls
-$.getJSON('/json/stationImage.json', function(data) {
+$.getJSON('./json/stationImage.json', function(data) {
     imageUrls = data.url;
 });
 
