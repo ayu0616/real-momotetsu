@@ -107,21 +107,50 @@ $(window).on("load resize", function () {
     // カードの写真のサイズを変更
     changeCardImageSize(windowWidth);
 
-    // 追加／削除するclass
-    const timeContainerClass = "border rounded mx-0 mb-3";
-    // ウィンドウの横幅が575以下のとき
     if ($(window).width() <= 575) {
-        $("#time-container")
-            .height(windowHeight * 0.35)
-            .addClass(timeContainerClass);
-        $("#time-container > div:nth-child(1)").addClass("mt-3");
-        $("#time-container div.d-flex").height("").addClass("my-3");
+        $("#carousel-control").removeClass("d-none");
+        $("#carousel-control").addClass("d-flex");
+
+        const container = $("#time-container");
+
+        container.parent().addClass("carousel carousel-dark slide");
+        container.parent().attr("data-bs-ride", "carousel");
+
+        container.removeClass("row");
+        container.addClass("carousel-inner");
+
+        container.children("div").each(function (index) {
+            $(this).removeClass("col-sm-6 mb-3");
+            $(this).addClass("carousel-item");
+            $(this).attr("data-bs-interval", "1000000");
+
+            const child = $(this).children();
+            child.removeClass("h-100");
+            child.addClass("d-block w-100 overflow-auto");
+            child.height(windowHeight * 0.3);
+        });
     } else {
-        $("#time-container").height("").removeClass(timeContainerClass);
-        $("#time-container > div:nth-child(1)").removeClass("mt-3");
-        if ($("#visited-station-list").height() > $("#time-container div.d-flex").height()) {
-            $("#time-container div.d-flex").height($("#visited-station-list").height()).removeClass("my-3");
-        }
+        $("#carousel-control").removeClass("d-flex");
+        $("#carousel-control").addClass("d-none");
+
+        const container = $("#time-container");
+
+        container.removeClass("carousel carousel-dark slide");
+        container.parent().removeAttr("data-bs-ride");
+
+        container.removeClass("carousel-inner");
+        container.addClass("row");
+
+        container.children("div").each(function () {
+            $(this).removeClass("carousel-item");
+            $(this).addClass("col-sm-6 mb-3");
+            $(this).removeAttr("data-bs-interval");
+
+            const child = $(this).children();
+            child.removeClass("d-block w-100 overflow-auto");
+            child.addClass("h-100");
+            child.height("");
+        });
     }
 });
 
@@ -154,6 +183,7 @@ const getJson = async () => {
         jsonStation = json.駅;
         jsonForced = json.必ず下車;
         jsonMission = json.ミッション;
+        jsonLastTime = json.最終出発時刻;
         jsonLen = Object.keys(jsonNumber).length - 1;
     });
 };
@@ -162,15 +192,57 @@ const getJson = async () => {
 const showMissionStation = async () => {
     const stationNum = localStorage.getItem("stationNum");
     if (stationNum == null) {
-        $("#current-station-name").text("未開始");
-        $("#current-mission").html("サイコロを回すとこの欄に駅が表示されます");
+        $("#current-station-name").text("開始していません");
     } else {
         const stationName = jsonStation[stationNum];
         const stationText = `${stationNum}. ${stationName}`;
         $("#current-station-name").text(stationText);
 
+        // ミッションを表示
         const stationMission = jsonMission[stationNum];
         $("#current-mission").append(stationMission);
+
+        const lastTime = jsonLastTime[stationNum];
+
+        // 最終出発時刻を表示
+        if (lastTime == null) {
+            $("#last-time").text("——");
+            $("#remaining-time").html("——");
+        } else {
+            $("#last-time").text(lastTime);
+        }
+
+        setInterval(showRemainingTime, 15000, lastTime);
+    }
+};
+
+const showRemainingTime = (lastTime) => {
+    if (lastTime != null) {
+        // 最終出発時刻を時間と分に分ける
+        const lastTimeArray = lastTime.split(":");
+        const lastHour = Number(lastTimeArray[0]);
+        const lastMinute = Number(lastTimeArray[1]);
+
+        // 現在時刻を取得
+        const nowTime = new Date();
+        const nowHour = nowTime.getHours();
+        const nowMinute = nowTime.getMinutes();
+
+        // 時間の差を取得（分）
+        const timeDelta = lastHour * 60 + lastMinute - (nowHour * 60 + nowMinute);
+
+        // 時間オーバーかどうかで場合分け
+        let remainingTimeText;
+        if (timeDelta < 0) {
+            remainingTimeText = "時間切れです";
+        } else {
+            const hourDelta = Math.floor(timeDelta / 60);
+            const minuteDelta = timeDelta % 60;
+            remainingTimeText = `${hourDelta}時間${minuteDelta}分`;
+        }
+
+        // 残り時間を表示
+        $("#remaining-time").text(remainingTimeText);
     }
 };
 

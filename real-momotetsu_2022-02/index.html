@@ -40,31 +40,55 @@
     <div class="container">
         <h1 class="my-3">トップページ</h1>
 
-        <!-- 横幅が広いとき -->
-        <div class="row overflow-auto" id="time-container">
-            <div class="col-sm-6">
-                <div class="border border-pink rounded text-center">
-                    <h2 class="m-3">挑戦中のミッション駅</h2>
-                    <div class="m-3 d-flex flex-column justify-content-center">
-                        <h3 id="current-station-name">〇〇駅</h3>
-                        <p id="current-mission" class="m-0">【ミッション】<br></p>
+        <div id="carousel">
+            <div class="row" id="time-container">
+                <div class="col-sm-6 active">
+                    <div class="border border-pink rounded text-center">
+                        <h2 class="m-3">挑戦中のミッション駅</h2>
+                        <div class="m-3 d-flex flex-column justify-content-center">
+                            <h3 id="current-station-name">〇〇駅</h3>
+                            <table id="current-station-info" class="table">
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">ミッション</th>
+                                        <td id="current-mission"></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">最終出発時刻</th>
+                                        <td id="last-time"></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">残り時間</th>
+                                        <td id="remaining-time"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="border border-pink rounded text-center">
+                        <h2 class="m-3">これまで訪れた駅</h2>
+                        <div id="visited-station-list" class="m-3 text-start row row-cols-2"></div>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6">
-                <div class="border border-pink rounded text-center">
-                    <h2 class="m-3">これまで訪れた駅</h2>
-                    <div id="visited-station-list" class="m-3 text-start row row-cols-2"></div>
-                </div>
+            <div id="carousel-control" class="d-flex justify-content-between mb-3">
+                <a class="carousel-control-prev" href="#carousel" role="button" data-bs-slide="prev">
+                    <i class="bi bi-chevron-double-left fs-1"></i>
+                    <span>PREV</span>
+                </a>
+                <ol class="carousel-indicators position-relative m-0 align-items-center">
+                    <li data-bs-target="#carousel" data-bs-slide-to="0" class="active"></li>
+                    <li data-bs-target="#carousel" data-bs-slide-to="1"></li>
+                </ol>
+                <a class="carousel-control-next" href="#carousel" role="button" data-bs-slide="next">
+                    <span>NEXT</span>
+                    <i class="bi bi-chevron-double-right fs-1"></i>
+                </a>
             </div>
         </div>
-        <!-- 横幅が広いとき -->
 
-        <!-- 横幅が狭いとき -->
-        <div id="carousel" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner"></div>
-        </div>
-        <!-- 横幅が狭いとき -->
         <div class="row row-cols-1" id="card-container">
             <div id="station-list-card">
                 <a href="./station-list.html">

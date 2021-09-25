@@ -49,3 +49,15 @@ div[id^='dice-container']>img {
 .card {
     flex-direction: row;
 }
+
+#carousel .carousel-control-next, #carousel .carousel-control-prev {
+    position: relative;
+    color: black;
+    width: auto;
+    text-decoration: none;
+}
+
+#current-station-info > tbody > tr > th {
+    width: 7em;
+    vertical-align: middle;
+}
