@@ -2,23 +2,6 @@
 const head = $("#rule-container h2");
 head.addClass("m-3");
 
-// 見出しの高さを設定する関数を定義
-// const setHeight = () => {
-//     const windowHeight = $(window).height();
-//     const tocTop = $('#toc').offset().top;
-//     const tocHeight = windowHeight - tocTop;
-//     $('#toc').height(tocHeight);
-// }
-
-// 横並びか否かで見出しの高さを変更
-// $(window).on('load resize', function() {
-//     if($(window).width() > 575) {
-// setHeight();
-// } else {
-// $('#toc').height(`${$(window).height() / 3}`);
-//     }
-// });
-
 // 見出しにidを振る関数を定義
 const addIdToHead = () => {
     head.each(function (index) {
@@ -91,16 +74,27 @@ $(window).on("load resize", stickToc);
     $("#rule-container ol").addClass("m-3").css("padding-left", "1.5em");
 })();
 
-// 「TOPに戻るボタン」を押したときの動作
+// TOPに戻るボタン
 $(function () {
     var topBtn = $(".page-top");
-    $(window).on("load scroll", function () {
+
+    // ページを読み込んだとき
+    $(window).on("load", () => {
         if ($(this).scrollTop() > 100) {
-            topBtn.fadeIn()
+            topBtn.show();
+        }
+    });
+
+    // ページをスクロールしたとき
+    $(window).on("scroll", function () {
+        if ($(this).scrollTop() > 100) {
+            topBtn.fadeIn();
         } else {
             topBtn.fadeOut();
         }
     });
+
+    // 押したとき
     topBtn.click(function () {
         $("body, html").animate(
             {

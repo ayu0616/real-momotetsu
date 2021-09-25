@@ -86,7 +86,7 @@ const changeCardImageSize = (windowWidth) => {
     });
 
     const size = Math.min.apply(null, heightList);
-    const maxWidth = $(".card").width() * 3 / 10;
+    const maxWidth = ($(".card").width() * 3) / 10;
 
     card.each(function () {
         if (size < maxWidth) {
@@ -147,27 +147,23 @@ let jsonForced;
 let jsonMission;
 let jsonLen;
 
-$.getJSON("./json/山陽本線（岡山→宮島口）.json", function (data) {
-    json = data;
-    jsonNumber = json.Number;
-    jsonStation = json.駅;
-    jsonForced = json.必ず下車;
-    jsonMission = json.ミッション;
-    jsonLen = Object.keys(jsonNumber).length - 1;
-
-    // 「挑戦中のミッション駅」を表示する
-    showMissionStation();
-
-    // 「これまで訪れた駅」を表示する
-    showVisitedStations();
-});
+const getJson = async () => {
+    await $.getJSON("./json/山陽本線（岡山→宮島口）.json", function (data) {
+        json = data;
+        jsonNumber = json.Number;
+        jsonStation = json.駅;
+        jsonForced = json.必ず下車;
+        jsonMission = json.ミッション;
+        jsonLen = Object.keys(jsonNumber).length - 1;
+    });
+};
 
 // 「挑戦中のミッション駅」を表示する関数を定義
-const showMissionStation = () => {
+const showMissionStation = async () => {
     const stationNum = localStorage.getItem("stationNum");
     if (stationNum == null) {
-        $("#current-station-name").text('未開始');
-        $("#current-mission").html('サイコロを回すとこの欄に駅が表示されます');
+        $("#current-station-name").text("未開始");
+        $("#current-mission").html("サイコロを回すとこの欄に駅が表示されます");
     } else {
         const stationName = jsonStation[stationNum];
         const stationText = `${stationNum}. ${stationName}`;
@@ -179,7 +175,7 @@ const showMissionStation = () => {
 };
 
 // 「これまで訪れた駅」を表示する関数を定義
-const showVisitedStations = () => {
+const showVisitedStations = async () => {
     const stationNums = JSON.parse(localStorage.getItem("visitedList"));
     if (stationNums == null) {
         $("#visited-station-list").parent().append("<p>サイコロを回すとこの欄に駅が表示されます</p>");
@@ -193,3 +189,14 @@ const showVisitedStations = () => {
         });
     }
 };
+
+(async () => {
+    // jsonを取得
+    await getJson();
+
+    // 「挑戦中のミッション駅」を表示する
+    showMissionStation();
+
+    // 「これまで訪れた駅」を表示する
+    showVisitedStations();
+})();

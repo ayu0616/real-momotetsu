@@ -66,11 +66,11 @@
                             勝敗・順位は以下の優先度で決定する。（上にあるほど優先度が高い）
                             <ul class="mt-1 mb-2">
                                 <li>最終到達駅が目標駅に近い</li>
-                                <li>最終到達駅が同じ場合、到達時刻が早い</li>
-                                <li></li>
+                                <li>到達時刻が早い（到達時刻⋯列車が目標駅に到着した時刻）</li>
+                                <li>ミッションの達成数が多い</li>
                             </ul>
                         </li>
-                        <li></li>
+                        <li>以上によって勝敗・順位が定まらない場合は該当チームを同じ順位とする。</li>
                         <li></li>
                         <li></li>
                     </ol>
@@ -115,7 +115,9 @@
             </div>
         </div>
     </div>
-    <p class="page-top"><a href="#wrap" class="text-body"><i class="bi bi-arrow-up-circle-fill"></i></a></p>
+    <p class="page-top" style="display: none;">
+        <a href="#wrap" class="text-body"><i class="bi bi-arrow-up-circle-fill"></i></a>
+    </p>
 
 
     <!-- jQuery読み込み -->
