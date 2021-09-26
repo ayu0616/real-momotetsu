@@ -3,13 +3,17 @@ $(function () {
     const mainContainer = $("#main-container");
     const mainMaxWidth = 750;
     mainContainer.css("max-width", mainMaxWidth);
-    $(window).on("load resize", function () {
-        if ($(this).width() < mainMaxWidth + 32) {
+
+    const setMainMargin = () => {
+        if ($(window).width() < mainMaxWidth + 32) {
             mainContainer.css("margin", "1em");
         } else {
             mainContainer.css("margin", "1em auto");
         }
-    });
+    };
+
+    setMainMargin();
+    $(window).on("resize", setMainMargin);
 
     $(".list-group > a").addClass("text-dark text-decoration-none");
     const listGroupItems = $(".list-group > a > li");
