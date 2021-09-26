@@ -1,4 +1,16 @@
+// main
 $(function () {
+    const mainContainer = $("#main-container");
+    const mainMaxWidth = 750;
+    mainContainer.css("max-width", mainMaxWidth);
+    $(window).on("load resize", function () {
+        if ($(this).width() < mainMaxWidth + 32) {
+            mainContainer.css("margin", "1em");
+        } else {
+            mainContainer.css("margin", "1em auto");
+        }
+    });
+
     $(".list-group > a").addClass("text-dark text-decoration-none");
     const listGroupItems = $(".list-group > a > li");
     listGroupItems.addClass("list-group-item");
@@ -36,8 +48,8 @@ $(function () {
         });
     };
 
-    setIconMaxSize()
+    setIconMaxSize();
     $(window).on("resize", setIconMaxSize);
 
-    $('.d-flex > div:nth-child(2)').addClass('align-self-center')
+    $(".d-flex > div:nth-child(2)").addClass("align-self-center");
 });
