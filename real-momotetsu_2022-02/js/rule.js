@@ -59,6 +59,19 @@ const stickToc = () => {
 
 $(window).on("load resize", stickToc);
 
+// ウィンドウが狭いとき、目次の高さの上限を決める
+$(window).on("load resize", function () {
+    const windowWidth = $(this).width();
+    const windowHeight = $(this).height();
+    $("#toc").css("max-height", function () {
+        if (windowWidth <= 575) {
+            return windowHeight * 0.3;
+        } else {
+            return "";
+        }
+    });
+});
+
 // ルールの各見出しについてクラスを追加する
 (function () {
     $("#rule-container > div").addClass("my-3 border border-pink rounded");

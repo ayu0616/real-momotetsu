@@ -1,13 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- BootstrapのCSS読み込み -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
+    <!-- 自分のCSS読み込み -->
+    <link rel="stylesheet" href="./css/index.css">
+
     <title>muutravel</title>
 </head>
+
 <body>
-    <h1>muutravel</h1>
-    <a href="./real-momotetsu_2022-02/index.html">リアル桃鉄（2022年2月開催）</a>
+    <div class="m-3">
+        <h1>muutravel</h1>
+        <ul class="list-group">
+            <a href="./real-momotetsu_2022-02/index.html">
+                <li>
+                    <div>
+                        <div>
+                            <img src="./images/list-icons/peach.png" alt="桃の画像">
+                        </div>
+                        <div>
+                            リアル桃鉄（2022年2月開催）
+                        </div>
+                    </div>
+                </li>
+            </a>
+            <a href="">
+                <li>
+                    <div>
+                        <div>
+                            <img src="./images/list-icons/navigation_next.png" alt="次の看板">
+                        </div>
+                        <div>
+                            次の旅
+                        </div>
+                    </div>
+                </li>
+            </a>
+        </ul>
+    </div>
+
+    <!-- jQuery読み込み -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- 自分のjsを読み込み -->
+    <script type="text/javascript" src="./js/index.js"></script>
+    <!-- Bootstrap読み込み -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous">
+    </script>
 </body>
+
 </html>
