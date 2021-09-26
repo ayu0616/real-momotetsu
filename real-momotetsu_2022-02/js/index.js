@@ -154,20 +154,6 @@ $(window).on("load resize", function () {
     }
 });
 
-// 時計を表示する関数を定義
-const showClock = () => {
-    let dateTime1 = new Date();
-    let date = dateTime1.getFullYear() + "年" + (dateTime1.getMonth() + 1) + "月" + dateTime1.getDate() + "日";
-
-    let time = dateTime1.getHours() + "時" + dateTime1.getMinutes() + "分" + dateTime1.getSeconds() + "秒";
-
-    $("#now-date").text(date);
-    $("#now-time").text(time);
-};
-
-showClock();
-setInterval("showClock()", 1000);
-
 // 駅とミッションの表をJSONで取得
 let json;
 let jsonNumber;
@@ -212,6 +198,7 @@ const showMissionStation = async () => {
             $("#last-time").text(lastTime);
         }
 
+        showRemainingTime(lastTime);
         setInterval(showRemainingTime, 15000, lastTime);
     }
 };
@@ -242,7 +229,26 @@ const showRemainingTime = (lastTime) => {
         }
 
         // 残り時間を表示
-        $("#remaining-time").text(remainingTimeText);
+        const remainingTimeElem = $("#remaining-time");
+        remainingTimeElem.text(remainingTimeText);
+
+        // 残り時間に応じてテキストの色を変える
+        if (timeDelta < 60) {
+            remainingTimeElem.css({
+                color: "red",
+                "font-weight": "bold",
+            });
+        } else if (timeDelta < 120) {
+            remainingTimeElem.css({
+                color: "#fcc800",
+                "font-weight": "bold",
+            });
+        } else {
+            remainingTimeElem.css({
+                color: "black",
+                "font-weight": "normal",
+            });
+        }
     }
 };
 
