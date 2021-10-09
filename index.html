@@ -2,53 +2,146 @@
 <html lang="ja">
 
 <head>
+    <!-- 以下各ページ共通 -->
+
+    <meta name="google-site-verification" content="NBVvw2Fil32wK5Bqv59_hcUBzD6vtejIoTVzEb9J5q8" />
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <meta name="author" content="ayu0616">
+    <!-- アイコン読み込み -->
+    <link rel="icon" href="./images/peach.png">
+    <link rel="apple-touch-icon" href="./images/peach.jpg">
     <!-- BootstrapのCSS読み込み -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
     <!-- 自分のCSS読み込み -->
-    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./css/main.css">
 
-    <title>MuuTravel</title>
+    <!-- 以上各ページ共通 -->
+
+    <meta name="description" content="2022年春開催予定の「リアル桃鉄」の情報を掲載したWEBサイトです。">
+    <title>TOP-PAGE - REAL-MOMOTETSU</title>
 </head>
 
 <body>
-    <main id="main-container">
-        <h1>MuuTravel</h1>
-        <ul class="list-group">
-            <a href="./real-momotetsu_2022-02/index.html">
-                <li>
-                    <div>
-                        <div>
-                            <img src="./images/list-icons/peach.png" alt="桃の画像">
-                        </div>
-                        <div>
-                            リアル桃鉄（2022年2月開催）
+    <nav class="navbar sticky-top navbar-expand-sm navbar-light bg-light">
+        <div class="container-fluid">
+            <a id="navbar-brand" class="navbar-brand" href="./index.html"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav" id="navbar-nav"></ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1 class="my-3">トップページ</h1>
+
+        <div id="carousel">
+            <div class="row" id="time-container">
+                <div class="col-sm-6 active">
+                    <div class="border border-pink rounded text-center">
+                        <h2 class="m-3">挑戦中のミッション駅</h2>
+                        <div class="m-3 d-flex flex-column justify-content-center">
+                            <h3 id="current-station-name">〇〇駅</h3>
+                            <table id="current-station-info" class="table m-0">
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">ミッション</th>
+                                        <td id="current-mission"></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">最終出発時刻</th>
+                                        <td id="last-time"></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">残り時間</th>
+                                        <td id="remaining-time"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-                </li>
-            </a>
-            <a href="#">
-                <li>
+                </div>
+                <div class="col-sm-6">
+                    <div class="border border-pink rounded text-center">
+                        <h2 class="m-3">これまで訪れた駅</h2>
+                        <div id="visited-station-list" class="m-3 text-start row row-cols-2"></div>
+                    </div>
+                </div>
+            </div>
+            <div id="carousel-control" class="d-flex justify-content-between mb-3">
+                <a class="carousel-control-prev" href="#carousel" role="button" data-bs-slide="prev">
+                    <i class="bi bi-chevron-double-left fs-1"></i>
+                    <span>PREV</span>
+                </a>
+                <ol class="carousel-indicators position-relative m-0 align-items-center">
+                    <li data-bs-target="#carousel" data-bs-slide-to="0" class="active"></li>
+                    <li data-bs-target="#carousel" data-bs-slide-to="1"></li>
+                </ol>
+                <a class="carousel-control-next" href="#carousel" role="button" data-bs-slide="next">
+                    <span>NEXT</span>
+                    <i class="bi bi-chevron-double-right fs-1"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="row row-cols-1" id="card-container">
+            <div id="station-list-card">
+                <a href="./station-list.html">
                     <div>
+                        <img src="./images/tokyo_eki.jpg" alt="東京駅の写真">
                         <div>
-                            <img src="./images/list-icons/navigation_next.png" alt="次の看板">
-                        </div>
-                        <div>
-                            次の旅
+                            <h5>駅リスト</h5>
+                            <p>今回の旅で訪れる駅のリスト。せっかく考えたミッション、半分以上は挑戦されることはないんだろうな。</p>
                         </div>
                     </div>
-                </li>
-            </a>
-        </ul>
-    </main>
+                </a>
+            </div>
+            <div id="dice-card">
+                <a href="./dice.html">
+                    <div>
+                        <img src="./images/dice-irasutoya.jpg" alt="サイコロの写真">
+                        <div>
+                            <h5>サイコロ</h5>
+                            <p>自動でサイコロを振ってくれる。次にどの駅に止まるべきかも教えてくれる。コンピューターに自らの行動を決定されるって近未来的だね。</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div id="rule-card">
+                <a href="./rule.html">
+                    <div>
+                        <img src="./images/book_law_roppouzensyo.jpg" alt="六法全書の写真">
+                        <div>
+                            <h5>ルール</h5>
+                            <p>「リアル桃鉄」のルールを記載している。こんな長ったらしいもの読みたくないよね。なんでこんなモノ作っちゃったんだろ...。</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div id="schedule-card">
+                <a href="./schedule.html">
+                    <div>
+                        <img src="./images/techou_open.jpg" alt="">
+                        <div>
+                            <h5>スケジュール</h5>
+                            <p>スケジュール、それは単なる空想に過ぎない。これが実現することはめったにない。めったにないけどつくるだけつくっときました。</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
 
     <!-- jQuery読み込み -->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="./js/jquery-3.6.0.min.js"></script>
     <!-- 自分のjsを読み込み -->
+    <script type="text/javascript" src="./js/main.js"></script>
     <script type="text/javascript" src="./js/index.js"></script>
     <!-- Bootstrap読み込み -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous">
