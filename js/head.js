@@ -1,4 +1,4 @@
-const head = `
+const headText = `
 <meta name="google-site-verification" content="NBVvw2Fil32wK5Bqv59_hcUBzD6vtejIoTVzEb9J5q8" />
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,4 +14,4 @@ const head = `
 <link rel="stylesheet" href="./css/main.css">
 `;
 
-$('head').prepend(head)
+$('head').prepend(headText)
