@@ -21,10 +21,14 @@ const addIdToTable = () => {
 (() => {
     // それぞれの時間のスケジュールを作成
     const timeSchedule = (scheduleDay, json) => {
-        for(let key in json) {
-            const hour = json[key]["hour"];
-            const minute = json[key]["minute"];
-            const content = json[key]["content"];
+        console.log(json["values"].slice(1));
+        json["values"].slice(1).forEach(function (value) {
+            if (value[0] == undefined) {
+                return true;
+            }
+            const hour = value[0];
+            const minute = value[1];
+            const content = value[2];
 
             const day = scheduleDay;
             const minute2 = ("0" + minute).slice(-2);
@@ -45,7 +49,7 @@ const addIdToTable = () => {
 
             const tbody = $(`#table-day${day} > tbody`);
             tbody.append(tr);
-        };
+        });
     };
 
     dayScheduleContainer(3);
@@ -82,18 +86,20 @@ const addIdToTable = () => {
     days.append(table);
     addIdToTable();
 
+    const APIKey = "AIzaSyBh6fWBIDR8nZvucod3Fe77Ro4Hd3xtjO8";
+    const sheetID = "1lnXrQX5YKoFlkaHdYmLpNelnKntrH8ijqRjsoHGOidI";
     // スケジュールを表に書く
-    $.getJSON("../json/schedule/day1.json", (json) => {
+    $.getJSON(`https://sheets.googleapis.com/v4/spreadsheets/${sheetID}/values/day1!A1:C200?key=${APIKey}`, (json) => {
         timeSchedule(1, json);
     });
 
     // 2日目のスケジュール
-    $.getJSON("../json/schedule/day2.json", (json) => {
+    $.getJSON(`https://sheets.googleapis.com/v4/spreadsheets/${sheetID}/values/day2!A1:C200?key=${APIKey}`, (json) => {
         timeSchedule(2, json);
     });
 
     // 3日目のスケジュール
-    $.getJSON("../json/schedule/day3.json", (json) => {
+    $.getJSON(`https://sheets.googleapis.com/v4/spreadsheets/${sheetID}/values/day3!A1:C200?key=${APIKey}`, (json) => {
         timeSchedule(3, json);
     });
 })();
